@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.lanou.bestbeautifulthings.homepage.HomePageActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"></FrameLayout>
+
+    <RadioGroup
+        android:id="@+id/homepage_radiogroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_magazine"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/rb_marginbottom"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="true"
+            android:drawableTop="@drawable/select_magazine"
+            android:gravity="center"
+            android:text="@string/magazine"
+            android:textColor="#646464" />
+
+        <RadioButton
+            android:id="@+id/rb_discover"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/rb_marginbottom"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/select_discover"
+            android:gravity="center"
+            android:text="@string/discover"
+            android:textColor="#646464" />
+
+        <RadioButton
+            android:id="@+id/rb_designer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/rb_marginbottom"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/select_designer"
+            android:gravity="center"
+            android:text="@string/designer"
+            android:textColor="#646464" />
+
+        <RadioButton
+            android:id="@+id/rb_mine"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/rb_marginbottom"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/select_mine"
+            android:gravity="center"
+            android:text="@string/mine"
+            android:textColor="#646464" />
+    </RadioGroup>
+
+</LinearLayout>

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">BestBeautifulThings</string>
+    <string name="designer">设计师</string>
+    <string name="discover">发现</string>
+    <string name="magazine">画报</string>
+    <string name="mine">我</string>
 </resources>
