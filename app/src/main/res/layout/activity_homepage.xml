@@ -7,6 +7,7 @@
     tools:context="com.lanou.bestbeautifulthings.homepage.HomePageActivity">
 
     <FrameLayout
+        android:id="@+id/homepage_framelayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"></FrameLayout>
