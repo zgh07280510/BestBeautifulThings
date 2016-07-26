@@ -94,4 +94,9 @@ public class NetRequest {
     public <T> void getDesignerBean(Class<T> tClass, NetListener.OnSucceed<T> onSucceed, NetListener.OnError onError) {
         getRequestAsync(Urls.DESIGNER, tClass, onError, onSucceed);
     }
+
+    //画报页面数据
+    public <T> void getMagazineBean(Class<T> tClass, NetListener.OnSucceed<T> onSucceed, NetListener.OnError onError){
+        getRequestAsync(Urls.MAGAZINE,tClass,onError,onSucceed);
+    }
 }
