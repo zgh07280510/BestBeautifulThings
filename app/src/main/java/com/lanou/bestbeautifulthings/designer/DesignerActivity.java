@@ -3,9 +3,11 @@ package com.lanou.bestbeautifulthings.designer;
 import android.util.Log;
 import android.widget.GridView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.lanou.bestbeautifulthings.R;
 import com.lanou.bestbeautifulthings.base.BaseActivity;
+import com.lanou.bestbeautifulthings.base.MyApp;
 import com.lanou.bestbeautifulthings.net.NetListener;
 import com.lanou.bestbeautifulthings.net.NetRequest;
 
@@ -29,14 +31,13 @@ public class DesignerActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        designerAdapter = new DesignerAdapter(this);
-        NetRequest.getInstance().getDesignerBean(DesignerBean.class,new NetListener.OnSucceed<DesignerBean>() {
+        designerAdapter = new DesignerAdapter(MyApp.getContext());
+        NetRequest.getInstance().getDesignerBean(DesignerBean.class, new NetListener.OnSucceed<DesignerBean>() {
             @Override
             public void OnSucceed(DesignerBean result) {
 
                 Log.d("DesignerActivity", "result:" + result.getData().getDesigners().get(1).getName());
                 designerAdapter.setDesignerBean(result);
-
 
 
             }
