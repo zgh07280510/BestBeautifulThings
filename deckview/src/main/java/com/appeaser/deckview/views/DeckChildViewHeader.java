@@ -119,6 +119,7 @@ public class DeckChildViewHeader extends FrameLayout {
         // Initialize the icon and description views
         mApplicationIcon = (ImageView) findViewById(R.id.application_icon);
         mActivityDescription = (TextView) findViewById(R.id.activity_description);
+
         mDismissButton = (ImageView) findViewById(R.id.dismiss_task);
 
         // Hide the backgrounds if they are ripple drawables
@@ -187,6 +188,7 @@ public class DeckChildViewHeader extends FrameLayout {
 
         mActivityDescription.setText(headerTitle);
 
+
         // Try and apply the system ui tint
         int existingBgColor = (getBackground() instanceof ColorDrawable) ?
                 ((ColorDrawable) getBackground()).getColor() : 0;
@@ -197,6 +199,7 @@ public class DeckChildViewHeader extends FrameLayout {
         mCurrentPrimaryColor = headerBgColor;
         //mCurrentPrimaryColorIsDark = t.useLightOnPrimaryColor;
         mActivityDescription.setTextColor(mConfig.taskBarViewLightTextColor);
+
         mDismissButton.setImageDrawable(mLightDismissDrawable);
         mDismissButton.setContentDescription(String.format(mDismissContentDescription,
                 headerTitle));
