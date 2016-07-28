@@ -57,6 +57,7 @@ public class DesignerAdapter extends BaseAdapter {
         holder.tvRecommend.setText(designerBean.getData().getDesigners().get(position).getName());
         holder.tvDesigner.setText(designerBean.getData().getDesigners().get(position).getLabel());
         Log.d("DDDDDDDD", designerBean.getData().getDesigners().get(position).getName());
+        
         return convertView;
     }
 
