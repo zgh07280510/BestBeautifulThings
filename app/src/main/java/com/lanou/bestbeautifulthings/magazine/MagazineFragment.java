@@ -77,10 +77,9 @@ public class MagazineFragment extends BaseFragment {
                         datum.id = generateUniqueKey();
 //                         Html.fromHtml("<font color=\"#ff0000\">红色</font>其它颜色");
                         String title = result.getData().getArticles().get(i).getTitle();
-
                         String subTitle = result.getData().getArticles().get(i).getSub_title();
-
-                        datum.headerTitle = title + "\n" + subTitle;
+                        //+ "\n" + subTitle;
+                        datum.headerTitle = title;
                         mEntries.add(datum);
                     }
 
