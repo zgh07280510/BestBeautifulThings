@@ -1,4 +1,4 @@
-package com.lanou.bestbeautifulthings.designer;
+package com.lanou.bestbeautifulthings.designer.bean;
 
 import java.util.List;
 
