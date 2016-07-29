@@ -7,6 +7,6 @@
 
     <ImageView
         android:id="@+id/iv_introduce_recycler"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="150dp" />
 </LinearLayout>

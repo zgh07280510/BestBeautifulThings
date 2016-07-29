@@ -128,7 +128,6 @@ public class NetRequest {
     public <T> void getDesignerWorksBean(String id, Class<T> t, NetListener.OnSucceed<T> onSucceed, NetListener.OnError onError) {
 
         getRequestAsync(Urls.DESIGNER_WORKS_URL_HEAD + id + Urls.DESIGNER_WORKS_URL_END, t, onError, onSucceed);
-        Log.d("NetRequest", Urls.DESIGNER_WORKS_URL_HEAD + id + Urls.DESIGNER_WORKS_URL_END);
     }
 
 
