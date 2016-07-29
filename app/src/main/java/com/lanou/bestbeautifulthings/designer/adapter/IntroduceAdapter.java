@@ -48,7 +48,6 @@ public class IntroduceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         DesignerWorksViewHolder holder1 = (DesignerWorksViewHolder) holder;
-        Log.d("IntroduceAdapter", "data.getData().getProducts().size():" + data.getData().getProducts().size());
         Glide.with(context).load(data.getData().getProducts().get(position).getImages().get(0)).centerCrop().crossFade().into(holder1.imageView);
         ((DesignerWorksViewHolder) holder).layout.setOnClickListener(new View.OnClickListener() {
             @Override
