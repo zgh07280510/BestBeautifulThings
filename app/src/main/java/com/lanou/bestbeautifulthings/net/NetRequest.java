@@ -3,6 +3,7 @@ package com.lanou.bestbeautifulthings.net;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -99,4 +100,54 @@ public class NetRequest {
     public <T> void getMagazineBean(Class<T> tClass, NetListener.OnSucceed<T> onSucceed, NetListener.OnError onError){
         getRequestAsync(Urls.MAGAZINE,tClass,onError,onSucceed);
     }
+
+    /**
+     * 设计师简介及作品简介
+     *
+     * @param id      设计师页面数据designers内的每个id
+     * @param tClass
+     * @param onSucceed
+     * @param onError
+     * @param <T>
+     */
+    public <T> void getDesignerInformationBean(String id, Class<T> tClass, NetListener.OnSucceed<T> onSucceed, NetListener.OnError onError) {
+
+        getRequestAsync(Urls.DESIGNER_INFORMATION_URL_HEAD + id + Urls.DESIGNER_INFORMATION_URL_END,tClass,onError, onSucceed);
+
+    }
+
+    /**
+     * 设计师作品(recyclerView的数据)
+     *
+     * @param id      设计师页面数据designers内的每个id
+     * @param t
+     * @param onSucceed
+     * @param onError
+     * @param <T>
+     */
+    public <T> void getDesignerWorksBean(String id, Class<T> t, NetListener.OnSucceed<T> onSucceed, NetListener.OnError onError) {
+
+        getRequestAsync(Urls.DESIGNER_WORKS_URL_HEAD + id + Urls.DESIGNER_WORKS_URL_END, t, onError, onSucceed);
+        Log.d("NetRequest", Urls.DESIGNER_WORKS_URL_HEAD + id + Urls.DESIGNER_WORKS_URL_END);
+    }
+
+
+    /**
+     * 设计师作品详情
+     *
+     * @param id      设计师作品数据的products内的每个id
+     * @param t
+     * @param onSucceed
+     * @param onError
+     * @param <T>
+     */
+    public <T> void getDesignerWorksInformationBean(String id, Class<T> t, NetListener.OnSucceed<T> onSucceed, NetListener.OnError onError) {
+
+        getRequestAsync(Urls.DESIGNER_WORKS_INFORMATION_URL_HEAD + id + Urls.DESIGNER_WORKS_INFORMATION_URL_END, t, onError, onSucceed);
+
+    }
+
+
+
+
 }

@@ -1,4 +1,4 @@
-package com.lanou.bestbeautifulthings.designer;
+package com.lanou.bestbeautifulthings.designer.view;
 
 import android.content.Context;
 import android.util.AttributeSet;

@@ -1,4 +1,4 @@
-package com.lanou.bestbeautifulthings.designer;
+package com.lanou.bestbeautifulthings.designer.fragment;
 
 import android.view.View;
 
@@ -6,12 +6,12 @@ import com.lanou.bestbeautifulthings.R;
 import com.lanou.bestbeautifulthings.base.BaseFragment;
 
 /**
- * Created by zouguohua on 16/7/26.
+ * Created by dllo on 16/7/28.
  */
-public class DesignerFragment extends BaseFragment {
+public class BuyOnLineFragment extends BaseFragment {
     @Override
     protected int setLayout() {
-        return R.layout.fragment_designer;
+        return R.layout.fragment_buy_online;
     }
 
     @Override

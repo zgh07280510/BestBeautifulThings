@@ -6,19 +6,22 @@
     <application
         android:name=".base.MyApp"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_laun"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".homepage.HomePageActivity" />
+<<<<<<< HEAD
 
+=======
+        <activity android:name=".designer.DesignerInformationActivity"/>
+>>>>>>> feature/designer
     </application>
 
 </manifest>

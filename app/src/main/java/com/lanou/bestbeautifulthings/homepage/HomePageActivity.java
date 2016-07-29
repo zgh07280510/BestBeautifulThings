@@ -3,15 +3,13 @@ package com.lanou.bestbeautifulthings.homepage;
 import android.graphics.Color;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import com.lanou.bestbeautifulthings.R;
 import com.lanou.bestbeautifulthings.base.BaseActivity;
-import com.lanou.bestbeautifulthings.designer.DesignerFragment;
+import com.lanou.bestbeautifulthings.designer.fragment.DesignerFragment;
 import com.lanou.bestbeautifulthings.discover.DiscoverFragment;
 import com.lanou.bestbeautifulthings.magazine.MagazineFragment;
 import com.lanou.bestbeautifulthings.mine.MineFragment;

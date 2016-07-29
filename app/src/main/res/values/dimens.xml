@@ -3,4 +3,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="rb_marginbottom">10dp</dimen>
+    <dimen name="five_dp">5dp</dimen>
+    <dimen name="fifteen_dp">15dp</dimen>
+    <dimen name="twenty_dp">20dp</dimen>
+    <dimen name="ten_sp">10sp</dimen>
 </resources>
