@@ -37,6 +37,8 @@ public class SplashActivity extends BaseActivity {
             public void onFinish() {
                 Intent intent = new Intent(SplashActivity.this, HomePageActivity.class);
                 startActivity(intent);
+                countDownTimer.onFinish();
+
                 finish();
             }
         }.start();
