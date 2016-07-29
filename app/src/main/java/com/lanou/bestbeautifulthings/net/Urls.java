@@ -17,6 +17,4 @@ public class Urls {
     public static final String GOODS_INFORMATION_URL_HEAD = "http://design.zuimeia.com/api/v1/product/";
     public static final String GOODS_INFORMATION_URL_END = "/?device_id=863360020709857&platform=android&lang=zh&appVersion=1.0.5&appVersionCode=10005&systemVersion=23&countryCode=CN&user_id=8066&token=4ds-fedadc514db5f681beda&package_name=com.zuiapps.zuiworld";
 
-//    http://design.zuimeia.com/api/v1/products/designer/27/?page=1&page_size=30&user_id=0&device_id=863360020709857&platform=android&lang=zh&appVersion=1.0.4&appVersionCode=10004&systemVersion=23&countryCode=CN&user_id=0&token=&package_name=com.zuiapps.zuiworld
-
 }
