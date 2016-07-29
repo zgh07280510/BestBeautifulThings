@@ -1,5 +1,6 @@
 package com.lanou.bestbeautifulthings.magazine;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -16,16 +17,20 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.appeaser.deckview.views.DeckChildView;
 import com.appeaser.deckview.views.DeckView;
 import com.lanou.bestbeautifulthings.R;
 import com.lanou.bestbeautifulthings.base.BaseFragment;
+import com.lanou.bestbeautifulthings.magazine.magazinedetail.MagazineActivity;
 import com.lanou.bestbeautifulthings.net.NetListener;
 import com.lanou.bestbeautifulthings.net.NetRequest;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -40,14 +45,13 @@ public class MagazineFragment extends BaseFragment {
     private static int KEY = 0;
     DeckView<Datum> mDeckView;
     Drawable mDefaultHeaderIcon;
-    private Magazineoverbean bean;
-    private List<Magazineoverbean> beans;
+
 
     ArrayList<Datum> mEntries;
 
     Bitmap mDefaultThumbnail;
 
-    int scrollToChildIndex = -1, imageSize = 500;
+    int scrollToChildIndex = -1;
     private FrameLayout frameLayout;
 
     @Override
@@ -57,8 +61,9 @@ public class MagazineFragment extends BaseFragment {
 
     @Override
     protected void initView(View view) {
-        // mDeckView = (DeckView) view.findViewById(R.id.deckview);
+
         frameLayout = (FrameLayout) view.findViewById(R.id.content);
+
     }
 
     @Override
@@ -69,18 +74,15 @@ public class MagazineFragment extends BaseFragment {
             NetRequest.getInstance().getMagazineBean(MagazineBean.class, new NetListener.OnSucceed<MagazineBean>() {
                 @Override
                 public void OnSucceed(MagazineBean result) {
-                    //  Toast.makeText(context, "请求成功", Toast.LENGTH_SHORT).show();
-                    for (int i = result.getData().getArticles().size() - 1; i >= 0; i--) {
-                        //     Log.d("MagazineFragment", "result.getData().getArticles().size():" + result.getData().getArticles().size());
+                    for (int i = 0; i < result.getData().getArticles().size(); i++) {
                         Datum datum = new Datum();
-                        datum.link = result.getData().getArticles().get(i).getImage_url();
-                        datum.id = generateUniqueKey();
-//                         Html.fromHtml("<font color=\"#ff0000\">红色</font>其它颜色");
+                        datum.setLink(result.getData().getArticles().get(i).getImage_url());
+                        datum.setId(generateUniqueKey());
                         String title = result.getData().getArticles().get(i).getTitle();
                         String subTitle = result.getData().getArticles().get(i).getSub_title();
-                        //+ "\n" + subTitle;
-                        datum.headerTitle = title;
-                        mEntries.add(datum);
+                        datum.setHeaderTitle(title);
+                        datum.setSub_title(subTitle);
+                        mEntries.add(0, datum);
                     }
 
                     //  mDefaultThumbnail = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
@@ -107,7 +109,7 @@ public class MagazineFragment extends BaseFragment {
 
                         @Override
                         public void unloadViewData(Datum item) {
-                            Picasso.with(context).cancelRequest(item.target);
+                            Picasso.with(context).cancelRequest(item.getTarget());
                         }
 
                         @Override
@@ -118,7 +120,10 @@ public class MagazineFragment extends BaseFragment {
 
                         @Override
                         public void onItemClick(Datum item) {
-
+                            Intent intent = new Intent(context, MagazineActivity.class);
+                            intent.putExtra("magBean", item);
+                            startActivity(intent);
+                        //    context.startActivity(new Intent(context, MagazineActivity.class));
                         }
 
                         @Override
@@ -142,17 +147,6 @@ public class MagazineFragment extends BaseFragment {
                     Toast.makeText(context, "请求失败", Toast.LENGTH_SHORT).show();
                 }
             });
-//            for (int i = 0; i < 100; i++) {
-//                Datum datum = new Datum();
-//                datum.id = generateUniqueKey();
-//                datum.link = "http://lorempixel.com/" + imageSize + "/" + imageSize
-//                        + "/sports/" + "ID " + datum.id + "/";
-//                datum.headerTitle = "ImageID" + datum.id;
-//                mEntries.add(datum);
-//
-//
-//            }
-
 
         }
 
@@ -162,15 +156,14 @@ public class MagazineFragment extends BaseFragment {
     void loadViewDataInternal(final Datum datum,
                               final WeakReference<DeckChildView<Datum>> weakView) {
         // datum.target can be null
-        Picasso.with(context).cancelRequest(datum.target);
-
-        datum.target = new Target() {
+        Picasso.with(context).cancelRequest(datum.getTarget());
+        datum.target= new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                 // Pass loaded Bitmap to view
                 if (weakView.get() != null) {
                     weakView.get().onDataLoaded(datum, bitmap,
-                            mDefaultHeaderIcon, datum.headerTitle, Color.WHITE);
+                            mDefaultHeaderIcon, datum.getHeaderTitle(), Color.WHITE);
                 }
             }
 
@@ -179,7 +172,7 @@ public class MagazineFragment extends BaseFragment {
                 // Loading failed. Pass default thumbnail instead
                 if (weakView.get() != null) {
                     weakView.get().onDataLoaded(datum, mDefaultThumbnail,
-                            mDefaultHeaderIcon, datum.headerTitle + " Failed", Color.DKGRAY);
+                            mDefaultHeaderIcon, datum.getHeaderTitle() + " Failed", Color.DKGRAY);
                 }
             }
 
@@ -189,13 +182,13 @@ public class MagazineFragment extends BaseFragment {
                 // be replaced once the target Bitmap has been loaded
                 if (weakView.get() != null) {
                     weakView.get().onDataLoaded(datum, mDefaultThumbnail,
-                            mDefaultHeaderIcon, "Loading...", Color.DKGRAY);
+                            mDefaultHeaderIcon, "Loading...", Color.BLUE);
                 }
             }
         };
 
         // Begin loading
-        Picasso.with(context).load(datum.link).into(datum.target);
+        Picasso.with(context).load(datum.getLink()).into(datum.getTarget());
     }
 
     private static int generateUniqueKey() {

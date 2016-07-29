@@ -18,6 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".homepage.HomePageActivity" />
+        <activity android:name=".magazine.magazinedetail.MagazineActivity"/>
     </application>
 
 </manifest>
