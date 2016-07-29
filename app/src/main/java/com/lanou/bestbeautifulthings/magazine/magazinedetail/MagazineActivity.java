@@ -62,7 +62,6 @@ public class MagazineActivity extends BaseActivity {
         Datum magBean = intent.getParcelableExtra("magBean");
         String content = magBean.getContent();
         contentTv.setHtmlFromString(content, false);
-
         //设置底部icon圆形图片
         setbottomIcon();
         //设置用户头像圆形图片

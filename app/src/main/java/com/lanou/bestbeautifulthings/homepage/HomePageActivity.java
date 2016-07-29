@@ -1,6 +1,7 @@
 package com.lanou.bestbeautifulthings.homepage;
 
 import android.graphics.Color;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -64,25 +65,35 @@ public class HomePageActivity extends BaseActivity implements CompoundButton.OnC
 
     }
 
+    Fragment mfragment;
+    MagazineFragment magazineFragment = new MagazineFragment();
+    DiscoverFragment discoverFragment = new DiscoverFragment();
+    DesignerFragment designerFragment = new DesignerFragment();
+    MineFragment mineFragment = new MineFragment();
+
     @Override
     public void onClick(View v) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         switch (v.getId()) {
             case R.id.rb_magazine:
-                fragmentTransaction.replace(R.id.homepage_framelayout, new MagazineFragment());
+                fragmentTransaction.replace(R.id.homepage_framelayout, magazineFragment);
+                mfragment = magazineFragment;
 
                 break;
             case R.id.rb_discover:
 
-                fragmentTransaction.replace(R.id.homepage_framelayout, new DiscoverFragment());
+                fragmentTransaction.replace(R.id.homepage_framelayout, discoverFragment);
+                mfragment = discoverFragment;
                 break;
             case R.id.rb_designer:
-                fragmentTransaction.replace(R.id.homepage_framelayout, new DesignerFragment());
+                fragmentTransaction.replace(R.id.homepage_framelayout, designerFragment);
+                mfragment = designerFragment;
 
                 break;
             case R.id.rb_mine:
-                fragmentTransaction.replace(R.id.homepage_framelayout, new MineFragment());
+                fragmentTransaction.replace(R.id.homepage_framelayout, mineFragment);
+                mfragment = mineFragment;
                 break;
 
         }
