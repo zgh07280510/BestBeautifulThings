@@ -17,11 +17,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".homepage.HomePageActivity" />
-<<<<<<< HEAD
 
-=======
         <activity android:name=".designer.DesignerInformationActivity"/>
->>>>>>> feature/designer
+
     </application>
 
 </manifest>
