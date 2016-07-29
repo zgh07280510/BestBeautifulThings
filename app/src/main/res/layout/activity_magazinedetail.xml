@@ -3,11 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <com.lanou.bestbeautifulthings.magazine.magazinedetail.htmltextview.HtmlTextView
         android:id="@+id/magazine_detail_tv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffffff"></TextView>
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="#606060"
+        android:textSize="18sp"></com.lanou.bestbeautifulthings.magazine.magazinedetail.htmltextview.HtmlTextView>
 
     <RelativeLayout
         android:id="@+id/relative_layout_title_bar"
@@ -33,12 +36,12 @@
             android:orientation="horizontal">
 
             <TextView
-                android:scrollbars="vertical"
-                android:scrollbarStyle="insideInset"
                 android:id="@+id/magazine_detail_title_name"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical"
                 android:singleLine="true"
                 android:text="Carla Venticinque-Osborn Aaron Osborn"
                 android:textColor="#ffffff"
@@ -71,12 +74,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:background="#ffffff"
         android:orientation="horizontal">
 
         <ImageView
+            android:layout_gravity="center_vertical"
             android:id="@+id/bottom_bar_icon"
             android:layout_width="30dp"
             android:layout_height="30dp"

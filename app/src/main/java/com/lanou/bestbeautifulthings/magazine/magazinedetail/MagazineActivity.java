@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.lanou.bestbeautifulthings.R;
 import com.lanou.bestbeautifulthings.base.BaseActivity;
 import com.lanou.bestbeautifulthings.magazine.Datum;
+import com.lanou.bestbeautifulthings.magazine.magazinedetail.htmltextview.HtmlTextView;
 import com.lanou.bestbeautifulthings.util.RoundDrawable;
 
 import org.greenrobot.eventbus.EventBus;
@@ -40,7 +41,7 @@ public class MagazineActivity extends BaseActivity {
     private ImageView bottomIconIv;
     private ImageView titleIconIv;
     private List<Datum> datas;
-    private TextView contentTv;
+    private HtmlTextView contentTv;
 
     @Override
     public int setLayout() {
@@ -52,15 +53,16 @@ public class MagazineActivity extends BaseActivity {
         titleBarRv = (RelativeLayout) findViewById(R.id.relative_layout_title_bar);
         bottomIconIv = (ImageView) findViewById(R.id.bottom_bar_icon);
         titleIconIv = (ImageView) findViewById(R.id.magazine_detail_titlebar_icon);
-        contentTv = (TextView) findViewById(R.id.magazine_detail_tv);
+        contentTv = (HtmlTextView) findViewById(R.id.magazine_detail_tv);
     }
 
     @Override
     protected void initData() {
         Intent intent = getIntent();
         Datum magBean = intent.getParcelableExtra("magBean");
-        // Datum datum = (Datum) intent.getSerializableExtra("magBean");
-        // Toast.makeText(this, datum.getHeaderTitle(), Toast.LENGTH_SHORT).show();
+        String content = magBean.getContent();
+        contentTv.setHtmlFromString(content, false);
+
         //设置底部icon圆形图片
         setbottomIcon();
         //设置用户头像圆形图片
@@ -81,8 +83,10 @@ public class MagazineActivity extends BaseActivity {
                     y2 = event.getY();
                     //向上滑
                     if (y1 - y2 > 50) {
-                        showUpTranslateAnim();
-                        titleBarRv.setVisibility(View.GONE);
+                        if (titleBarRv.getVisibility() != View.GONE) {
+                            showUpTranslateAnim();
+                            titleBarRv.setVisibility(View.GONE);
+                        }
                         //向下滑
                     } else if (y2 - y1 > 50) {
                         if (titleBarRv.getVisibility() == View.GONE) {

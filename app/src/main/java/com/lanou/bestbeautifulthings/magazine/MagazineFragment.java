@@ -81,6 +81,7 @@ public class MagazineFragment extends BaseFragment {
                         String title = result.getData().getArticles().get(i).getTitle();
                         String subTitle = result.getData().getArticles().get(i).getSub_title();
                         datum.setHeaderTitle(title);
+                        datum.setContent(result.getData().getArticles().get(i).getContent());
                         datum.setSub_title(subTitle);
                         mEntries.add(0, datum);
                     }
@@ -123,7 +124,7 @@ public class MagazineFragment extends BaseFragment {
                             Intent intent = new Intent(context, MagazineActivity.class);
                             intent.putExtra("magBean", item);
                             startActivity(intent);
-                        //    context.startActivity(new Intent(context, MagazineActivity.class));
+                            //    context.startActivity(new Intent(context, MagazineActivity.class));
                         }
 
                         @Override
@@ -157,7 +158,7 @@ public class MagazineFragment extends BaseFragment {
                               final WeakReference<DeckChildView<Datum>> weakView) {
         // datum.target can be null
         Picasso.with(context).cancelRequest(datum.getTarget());
-        datum.target= new Target() {
+        datum.target = new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                 // Pass loaded Bitmap to view
