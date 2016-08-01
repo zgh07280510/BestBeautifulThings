@@ -1,15 +1,15 @@
 package com.lanou.bestbeautifulthings.designer;
 
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -26,8 +26,6 @@ import com.lanou.bestbeautifulthings.designer.fragment.PictorialFragment;
 import com.lanou.bestbeautifulthings.net.NetListener;
 import com.lanou.bestbeautifulthings.net.NetRequest;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,20 +39,20 @@ public class DesignerInformationActivity extends BaseActivity implements View.On
     private Button btnBack;
     private ImageView ivDesignerHead;
     private IntroduceFragmentAdapter introduceFragmentAdapter;
-    private IntroduceImagesAdapter introduceImagesAdapter;
     private List<Fragment> fragments;
     private DesignerInformationBean designerInformationBean;
-
+    private ImageView[] imageViews;
+    private ViewGroup viewGroup;
 
     @Override
     public int setLayout() {
-
         return R.layout.activity_designer_detail;
     }
 
     @Override
     protected void initView() {
         viewPager = (ViewPager) findViewById(R.id.designer_information_viewPager);
+        viewGroup = (ViewGroup) findViewById(R.id.image_viewGroup);
         btnBack = (Button) findViewById(R.id.btn_designer_information_back);
         ivDesignerHead = (ImageView) findViewById(R.id.iv_designer_head);
         tvConcept = (TextView) findViewById(R.id.tv_concept);
@@ -63,8 +61,6 @@ public class DesignerInformationActivity extends BaseActivity implements View.On
         tvName = (TextView) findViewById(R.id.tv_designer_name);
         tabLayout = (TabLayout) findViewById(R.id.works_tabLayout);
         introduceViewPager = (ViewPager) findViewById(R.id.introduce_viewPager);
-
-
     }
 
     @Override
@@ -75,9 +71,6 @@ public class DesignerInformationActivity extends BaseActivity implements View.On
         introduceFragmentAdapter.setFragments(fragments);
         introduceViewPager.setAdapter(introduceFragmentAdapter);
         tabLayout.setupWithViewPager(introduceViewPager);
-        //  tabLayout.setTabTextColors(Color.TRANSPARENT);
-        introduceImagesAdapter = new IntroduceImagesAdapter(MyApp.getContext());
-        viewPager.setAdapter(introduceImagesAdapter);
         String id = String.valueOf(getIntent().getIntExtra("id", 0));
         NetRequest.getInstance().getDesignerInformationBean(id, DesignerInformationBean.class, new NetListener.OnSucceed<DesignerInformationBean>() {
             @Override
@@ -88,17 +81,62 @@ public class DesignerInformationActivity extends BaseActivity implements View.On
                 tvConcept.setText(result.getData().getConcept());
                 tvDescription.setText(result.getData().getDescription());
                 designerInformationBean = result;
+                IntroduceImagesAdapter introduceImagesAdapter = new IntroduceImagesAdapter(MyApp.getContext());
+                introduceImagesAdapter.setDesignerInformationBean(designerInformationBean);
+                viewPager.setAdapter(introduceImagesAdapter);
+                //获取图片的数量
+                imageViews = new ImageView[designerInformationBean.getData().getIntroduce_images().size()];
+                //加点点
+                for (int i = 0; i < imageViews.length; i++) {
+                    ImageView image = new ImageView(MyApp.getContext());
+                    if (i== 0){
+                        image.setBackgroundResource(R.mipmap.abc_btn_rating_star_on_mtrl_alpha);
+                    }else {
+                        image.setBackgroundResource(R.mipmap.abc_btn_rating_star_off_mtrl_alpha);
+                    }
+                    imageViews[i] = image;
+                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(new ViewGroup.LayoutParams(10,10));
+                    viewGroup.addView(image,layoutParams);
 
 
+
+                }
             }
         }, new NetListener.OnError() {
             @Override
             public void onError() {
+            }
+        });
+//调用实现轮播的方法
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                setImageBackground(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
 
             }
         });
     }
-
+    //设置轮播图点点
+    public void setImageBackground(int items) {
+        if (imageViews != null && imageViews.length > 0) {
+            for (int i = 0; i < imageViews.length; i++) {
+                if (i == items % imageViews.length) {
+                    imageViews[i].setBackgroundResource(R.mipmap.abc_btn_rating_star_on_mtrl_alpha);
+                } else {
+                    imageViews[i].setBackgroundResource(R.mipmap.abc_btn_rating_star_off_mtrl_alpha);
+                }
+            }
+        }
+    }
     private void initFragment() {
         fragments = new ArrayList<>();
         String id = String.valueOf(getIntent().getIntExtra("id", 0));
@@ -120,6 +158,4 @@ public class DesignerInformationActivity extends BaseActivity implements View.On
                 break;
         }
     }
-
-
 }

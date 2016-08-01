@@ -20,7 +20,7 @@ import okhttp3.Response;
  * Created by dllo on 16/7/26.
  */
 public class NetRequest {
-
+//喝喝酒高科技
     private static NetRequest netRequest;
     public OkHttpClient client;
     private Gson gson;
