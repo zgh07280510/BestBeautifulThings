@@ -1,6 +1,8 @@
 package com.lanou.bestbeautifulthings.discover.discovermain;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,6 +18,7 @@ import com.lanou.bestbeautifulthings.util.RefreshListView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 
 /**
  * Created by zouguohua on 16/7/26.
@@ -72,8 +75,6 @@ public class YouWuFragment extends BaseFragment implements OnRefreshListener {
 
             }
         });
-
-
 
     }
 

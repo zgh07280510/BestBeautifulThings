@@ -12,7 +12,6 @@ import com.lanou.bestbeautifulthings.R;
 import com.lanou.bestbeautifulthings.base.BaseActivity;
 import com.lanou.bestbeautifulthings.designer.fragment.DesignerFragment;
 import com.lanou.bestbeautifulthings.discover.discovermain.DiscoverMainFragment;
-import com.lanou.bestbeautifulthings.discover.discovermain.YouWuFragment;
 import com.lanou.bestbeautifulthings.magazine.MagazineFragment;
 import com.lanou.bestbeautifulthings.mine.MineFragment;
 

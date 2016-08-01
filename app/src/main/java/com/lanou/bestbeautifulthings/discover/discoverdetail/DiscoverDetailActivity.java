@@ -3,6 +3,7 @@ package com.lanou.bestbeautifulthings.discover.discoverdetail;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -12,6 +13,7 @@ import com.lanou.bestbeautifulthings.R;
 import com.lanou.bestbeautifulthings.base.BaseActivity;
 import com.lanou.bestbeautifulthings.base.MyApp;
 import com.lanou.bestbeautifulthings.discover.beans.ShoesBean;
+import com.lanou.bestbeautifulthings.magazine.magazinedetail.MagazineActivity;
 import com.lanou.bestbeautifulthings.net.NetListener;
 import com.lanou.bestbeautifulthings.net.NetRequest;
 import com.lanou.bestbeautifulthings.util.XCRoundImageView;
@@ -24,13 +26,11 @@ import com.youth.banner.Banner;
 public class DiscoverDetailActivity extends BaseActivity {
     private Banner banner;
     private DetailBean bean;
-    private TextView digestTv, userNameTv, labelTv, conceptTv, detailNameTv, descTv, titleTv, subTv;
-    private ImageView titleIv;
+    private TextView digestTv, userNameTv, labelTv, conceptTv, detailNameTv, descTv;
     private XCRoundImageView userIv;
     private NoScrollGridView listView;
     private DetailActivityAdapter adapter;
     private String id = "693";
-    private RelativeLayout relativeLayout;
     private DetailactivityTitleAdapter tAdapter;
     private NoScrollGridView mListView;
 
@@ -48,12 +48,8 @@ public class DiscoverDetailActivity extends BaseActivity {
         conceptTv = (TextView) findViewById(R.id.detail_user_concept);
         detailNameTv = (TextView) findViewById(R.id.detail_name);
         descTv = (TextView) findViewById(R.id.detail_desc);
-        titleTv = (TextView) findViewById(R.id.detail_title_tv);
-        subTv = (TextView) findViewById(R.id.detail_sub_title);
-        titleIv = (ImageView) findViewById(R.id.detail_title_image);
         userIv = (XCRoundImageView) findViewById(R.id.detail_user_image);
         listView = (NoScrollGridView) findViewById(R.id.detail_list_view);
-        relativeLayout = (RelativeLayout) findViewById(R.id.magazine_relayout);
         mListView = (NoScrollGridView) findViewById(R.id.magazine_list_view);
 
     }
@@ -62,7 +58,7 @@ public class DiscoverDetailActivity extends BaseActivity {
     protected void initData() {
         adapter = new DetailActivityAdapter(this);
         tAdapter = new DetailactivityTitleAdapter(this);
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         id = intent.getStringExtra("id");
         NetRequest.getInstance().getDiscoverDtailInformation(110, id, DetailBean.class, new NetListener.OnSucceed<DetailBean>() {
             @Override
@@ -74,7 +70,7 @@ public class DiscoverDetailActivity extends BaseActivity {
                 digestTv.setText(bean.getData().getDigest());
                 userNameTv.setText(bean.getData().getDesigner().getName());
                 labelTv.setText(bean.getData().getDesigner().getLabel());
-                conceptTv.setText(bean.getData().getDesigner().getConcept());
+                conceptTv.setText("“" + bean.getData().getDesigner().getConcept() + "”");
                 detailNameTv.setText(bean.getData().getName());
                 descTv.setText(bean.getData().getDesc());
                 Picasso.with(MyApp.getContext()).load(bean.getData().getDesigner().getAvatar_url()).into(userIv);
@@ -82,6 +78,16 @@ public class DiscoverDetailActivity extends BaseActivity {
                 listView.setAdapter(adapter);
                 tAdapter.setData(bean);
                 mListView.setAdapter(tAdapter);
+                mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent1 = new Intent(DiscoverDetailActivity.this, MagazineActivity.class);
+                        String mId = String.valueOf(bean.getData().getRefer_articles().get(position).getId());
+                        Log.d("DiscoverDetailActivity", mId);
+                        intent1.putExtra("id",mId);
+                        startActivity(intent1);
+                    }
+                });
 
 
             }
