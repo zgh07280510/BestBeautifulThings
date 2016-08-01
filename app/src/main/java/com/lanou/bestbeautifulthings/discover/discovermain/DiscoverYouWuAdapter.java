@@ -1,6 +1,8 @@
 package com.lanou.bestbeautifulthings.discover.discovermain;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-
+import su.levenetc.android.badgeview.BadgeView;
 
 
 /**
@@ -25,6 +27,8 @@ public class DiscoverYouWuAdapter extends BaseAdapter  {
     private DiscoverBean datas;
     private Context context;
     private DetailViewHolder holder = null;
+    private Bitmap uBitmap;
+    private Bitmap lBitmap;
 
     public DiscoverYouWuAdapter(Context context) {
         this.context = context;
@@ -33,6 +37,8 @@ public class DiscoverYouWuAdapter extends BaseAdapter  {
     public void setDatas(DiscoverBean datas) {
         this.datas = datas;
         notifyDataSetChanged();
+        uBitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher);
+        lBitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher);
     }
 
     @Override
@@ -53,7 +59,7 @@ public class DiscoverYouWuAdapter extends BaseAdapter  {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         if (convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.discover_detail_item,parent,false);
@@ -78,7 +84,18 @@ public class DiscoverYouWuAdapter extends BaseAdapter  {
         Picasso.with(context).load(datas.getData().getActivities().get(position).getDesigner().getAvatar_url()).resize(480,320).into(holder.userIv);
         Glide.with(context).load(datas.getData().getActivities().get(position).getImages().get(0)).into(holder.coverIv);
         holder.digestTv.setText(datas.getData().getActivities().get(position).getDigest());
-
+        holder.unlikeBv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               holder.unlikeBv.setValues("%",datas.getData().getActivities().get(position).getProduct().getUnlike_user_num(),uBitmap,"unlike");
+            }
+        });
+        holder.likeBv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.likeBv.setValues("%", datas.getData().getActivities().get(position).getProduct().getLike_user_num(), lBitmap,"like");
+            }
+        });
         return convertView;
     }
     class DetailViewHolder{
@@ -87,6 +104,8 @@ public class DiscoverYouWuAdapter extends BaseAdapter  {
         XCRoundImageView userIv;
         TextView userNameTv;
         TextView userlabelTv;
+        BadgeView unlikeBv;
+        BadgeView likeBv;
 
         public DetailViewHolder(View view){
             coverIv = (ImageView) view.findViewById(R.id.discover_detail_cover_iv);
@@ -96,6 +115,8 @@ public class DiscoverYouWuAdapter extends BaseAdapter  {
             userlabelTv = (TextView) view.findViewById(R.id.user_label);
             dateTv = (TextView) view.findViewById(R.id.discover_detail_date_tv);
             weekTv = (TextView) view.findViewById(R.id.discover_detail_week);
+            unlikeBv = (BadgeView) view.findViewById(R.id.unlike_bv);
+            likeBv = (BadgeView) view.findViewById(R.id.like_bv);
 
         }
 

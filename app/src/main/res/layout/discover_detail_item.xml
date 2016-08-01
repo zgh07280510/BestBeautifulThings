@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <ImageView
         android:id="@+id/discover_detail_cover_iv"
         android:layout_width="420dp"
@@ -77,7 +78,35 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            />
+        <su.levenetc.android.badgeview.BadgeView
+            android:id="@+id/unlike_bv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:badgeTextSize="16dip"
+            app:badgeAnimationDuration="1000"
+            app:badgeText="unlike!"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="5dp"
+            />
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="30dp"
+            android:background="#ffffff"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="5dp"
+            />
+        <su.levenetc.android.badgeview.BadgeView
+            android:id="@+id/like_bv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            app:badgeTextSize="16dip"
+            app:badgeAnimationDuration="1000"
+            app:badgeText="like!"
+            android:layout_marginRight="5dp"
+            />
 
     </LinearLayout>
 
