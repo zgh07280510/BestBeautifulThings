@@ -11,12 +11,11 @@ import cn.bmob.v3.Bmob;
  */
 public class MyApp extends Application {
     private static Context context;
-
     @Override
     public void onCreate() {
         super.onCreate();
         context = this;
-        Bmob.initialize(this, "bf911a696fcf6c0d7321f0ad0912faff");
+       //Bmob.initialize(this, "bf911a696fcf6c0d7321f0ad0912faff");
     }
 
     public static Context getContext() {
