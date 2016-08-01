@@ -15,6 +15,9 @@ import com.lanou.bestbeautifulthings.discover.discovermain.DiscoverMainFragment;
 import com.lanou.bestbeautifulthings.magazine.MagazineFragment;
 import com.lanou.bestbeautifulthings.mine.MineFragment;
 
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
+
 /**
  * Created by zouguohua on 16/7/25.
  */
@@ -84,6 +87,9 @@ public class HomePageActivity extends BaseActivity implements CompoundButton.OnC
             case R.id.rb_magazine:
                 fragmentTransaction.replace(R.id.homepage_framelayout, magazineFragment);
                 mfragment = magazineFragment;
+
+
+      
 
                 break;
             case R.id.rb_discover:

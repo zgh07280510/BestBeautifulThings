@@ -3,14 +3,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.lanou.bestbeautifulthings.magazine.magazinedetail.htmltextview.HtmlTextView
-        android:id="@+id/magazine_detail_tv"
+    <ScrollView
+        android:id="@+id/magazine_detail_scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:textColor="#606060"
-        android:textSize="18sp"></com.lanou.bestbeautifulthings.magazine.magazinedetail.htmltextview.HtmlTextView>
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="100dp"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/magazine_head_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/magazine_head_author"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center" />
+
+            <ImageView
+                android:id="@+id/magazine_head_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.lanou.bestbeautifulthings.magazine.magazinedetail.htmltextview.HtmlTextView
+                android:id="@+id/magazine_detail_tv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="#404040"></com.lanou.bestbeautifulthings.magazine.magazinedetail.htmltextview.HtmlTextView>
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <RelativeLayout
         android:id="@+id/relative_layout_title_bar"
@@ -18,6 +53,7 @@
         android:layout_height="70dp">
 
         <ImageView
+            android:id="@+id/back_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -25,6 +61,7 @@
             android:src="@mipmap/ic_bottom_back_normal" />
 
         <RelativeLayout
+            android:id="@+id/designer_rv"
             android:layout_width="210dp"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
@@ -80,10 +117,10 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_gravity="center_vertical"
             android:id="@+id/bottom_bar_icon"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
             android:layout_margin="10dp"
             android:src="@mipmap/ic_mine_portrait" />
 
@@ -97,7 +134,7 @@
 
 
         <ImageView
-
+            android:id="@+id/comment_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -117,6 +154,7 @@
             android:text="112" />
 
         <ImageView
+            android:id="@+id/magazine_detail_share"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
