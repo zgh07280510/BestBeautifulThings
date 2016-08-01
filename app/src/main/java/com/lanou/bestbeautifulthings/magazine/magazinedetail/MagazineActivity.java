@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.lanou.bestbeautifulthings.R;
@@ -230,6 +231,7 @@ public class MagazineActivity extends BaseActivity implements View.OnClickListen
 
 // 启动分享GUI
                 oks.show(this);
+             //   Toast.makeText(this, "邹国华都比", Toast.LENGTH_SHORT).show();
 
                 break;
         }
