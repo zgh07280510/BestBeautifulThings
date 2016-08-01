@@ -45,10 +45,7 @@ public class MagazineFragment extends BaseFragment {
     private static int KEY = 0;
     DeckView<Datum> mDeckView;
     Drawable mDefaultHeaderIcon;
-
-
     ArrayList<Datum> mEntries;
-
     Bitmap mDefaultThumbnail;
 
     int scrollToChildIndex = -1;
