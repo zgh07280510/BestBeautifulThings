@@ -46,7 +46,6 @@ public class DesignerFragment extends BaseFragment {
             public void OnSucceed(DesignerBean result) {
                 data=result;
 
-
                 designerAdapter.setDesignerBean(result);
             }
         }, new NetListener.OnError() {
@@ -54,6 +53,7 @@ public class DesignerFragment extends BaseFragment {
             public void onError() {
             }
         });
+
         designerGridView.setAdapter(designerAdapter);
         designerGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

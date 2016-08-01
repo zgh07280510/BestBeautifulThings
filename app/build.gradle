@@ -33,4 +33,7 @@ dependencies {
     compile 'com.android.support:design:23+'
 
     compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.squareup.picasso:picasso:2.3.2'
+    compile 'com.youth.banner:banner:1.1.6'
+    compile 'com.youth.banner:banner:+'
 }
