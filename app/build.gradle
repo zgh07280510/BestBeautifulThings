@@ -23,11 +23,15 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.3.0'
+    compile project(':deckview')
+    compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.github.bumptech.glide:glide:3.7.0'
+
     compile 'cn.carbs.android:AvatarImageView:1.0.2'
     compile 'com.android.support:design:23+'
+
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.squareup.picasso:picasso:2.3.2'
     compile 'com.youth.banner:banner:1.1.6'
