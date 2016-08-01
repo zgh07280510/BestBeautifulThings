@@ -38,6 +38,12 @@
                         android:layout_marginLeft="@dimen/rb_marginbottom"
                         android:layout_marginTop="@dimen/rb_marginbottom"
                         android:background="@mipmap/abc_ic_ab_back_mtrl_am_alpha" />
+                    <LinearLayout
+                        android:id="@+id/image_viewGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_horizontal"/>
                 </RelativeLayout>
 
                 <cn.carbs.android.avatarimageview.library.AvatarImageView
@@ -101,13 +107,13 @@
                 android:id="@+id/works_tabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                app:tabTextColor="@android:color/white"/>
+                app:tabSelectedTextColor="@android:color/white"
+                app:tabTextColor="#5F5F5F"/>
             <android.support.v4.view.ViewPager
                 android:id="@+id/introduce_viewPager"
                 android:layout_width="match_parent"
-                android:layout_height="2000dp"
-             />
+                android:layout_height="1000dp"
+                android:background="@android:color/black"/>
 
             <!--app:tabSelectedTextColor="@android:color/white"-->
             <!--app:tabIndicatorColor="@android:color/white"-->

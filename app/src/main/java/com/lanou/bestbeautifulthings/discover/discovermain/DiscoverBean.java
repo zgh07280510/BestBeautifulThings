@@ -1,4 +1,4 @@
-package com.lanou.bestbeautifulthings.discover;
+package com.lanou.bestbeautifulthings.discover.discovermain;
 
 import java.util.List;
 

@@ -2,13 +2,13 @@ package com.lanou.bestbeautifulthings.designer.adapter;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.lanou.bestbeautifulthings.R;
+import com.lanou.bestbeautifulthings.base.MyApp;
 import com.lanou.bestbeautifulthings.designer.bean.DesignerInformationBean;
 
 import java.util.ArrayList;
@@ -18,44 +18,63 @@ import java.util.List;
  * Created by dllo on 16/7/28.
  */
 public class IntroduceImagesAdapter extends PagerAdapter {
+    private List<ImageView> imgs;
+
     private Context context;
-    private ImageView imageView;
-    private List<DesignerInformationBean.DataBean> designerInformationBean ;
-    private List<View> viewList;
 
     public IntroduceImagesAdapter(Context context) {
         this.context = context;
     }
 
-    public void setDesignerInformationBean(List<DesignerInformationBean.DataBean> designerInformationBean) {
-        this.designerInformationBean = designerInformationBean;
-        viewList = new ArrayList<>();
-        for (DesignerInformationBean.DataBean bean:designerInformationBean){
-            viewList.add(null);
+    public void setDesignerInformationBean(DesignerInformationBean designerInformationBean) {
+
+        imgs = new ArrayList<>();
+        for (int i = 0; i < designerInformationBean.getData().getIntroduce_images().size(); i++) {
+            ImageView imageView = new ImageView(context);
+            Glide.with(MyApp.getContext()).load(designerInformationBean.getData().getIntroduce_images().get(i))
+                    .centerCrop().crossFade().into(imageView);
+            imgs.add(imageView);
         }
         notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
-        return designerInformationBean== null?0:designerInformationBean.size();
+        return imgs.size();
+
     }
+
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return view==object;
+        return view == object;
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
-      DesignerInformationBean.DataBean bean = designerInformationBean.get(position);
-      View view= LayoutInflater.from(context).inflate(R.layout.introduce_image,null);
-      imageView = (ImageView) view.findViewById(R.id.iv_introduce);
-        Glide.with(context).load(designerInformationBean.get(position).getIntroduce_images()).into(imageView);
-        container.addView(view);
-         viewList.set(position,view);
+    public Object instantiateItem(ViewGroup container, final int position) {
+        //取出指定位置的图片ImageView
+        ImageView imageView = imgs.get(position % imgs.size());
+        /**
+         当图片少的时候,不会触发destroyItem
+         这个时候去向container中addView会报错
+         手动捕获这个异常
+         */
+        try {
+            container.addView(imageView);
+        } catch (IllegalStateException e) {
+            container.removeView(imageView);
+            container.addView(imageView);
+        }
 
-        return view;
+        return imageView;
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        if (container.getChildAt(position % imgs.size()) == object) {
+            //销毁指定位置的ImageView回收内存
+            container.removeViewAt(position % imgs.size());
+        }
     }
 
 

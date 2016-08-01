@@ -46,7 +46,6 @@ public class DesignerFragment extends BaseFragment {
             public void OnSucceed(DesignerBean result) {
                 data=result;
 
-
                 designerAdapter.setDesignerBean(result);
             }
         }, new NetListener.OnError() {
@@ -54,12 +53,12 @@ public class DesignerFragment extends BaseFragment {
             public void onError() {
             }
         });
+
         designerGridView.setAdapter(designerAdapter);
         designerGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Toast.makeText(context, "点击", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(),DesignerInformationActivity.class);
                 intent.putExtra("id",data.getData().getDesigners().get(position).getId());
                 startActivity(intent);

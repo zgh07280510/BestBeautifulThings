@@ -85,7 +85,7 @@ public class MagazineFragment extends BaseFragment {
 
                     //  mDefaultThumbnail = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
                     //       mDefaultHeaderIcon = getResources().getDrawable(R.mipmap.ic_launcher);
-                    mDeckView = new DeckView<Datum>(getContext());
+                    mDeckView = new DeckView<Datum>(context);
                     frameLayout.addView(mDeckView, -1, -1);
                     DeckView.Callback<Datum> deckViewCallback = new DeckView.Callback<Datum>() {
 
