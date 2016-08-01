@@ -112,11 +112,13 @@ public class NetRequest {
      * @param <T>
      */
     public <T> void getDesignerInformationBean(String id, Class<T> tClass, NetListener.OnSucceed<T> onSucceed, NetListener.OnError onError) {
-
         getRequestAsync(Urls.DESIGNER_INFORMATION_URL_HEAD + id + Urls.DESIGNER_INFORMATION_URL_END, tClass, onError, onSucceed);
-
     }
-
+    //旗舰店和网上购买
+    public <T> void getFlagshipAndBuyOnlineBean(String id, Class<T> tClass, NetListener.OnSucceed<T> onSucceed, NetListener.OnError onError) {
+        getRequestAsync(Urls.FLAGSHIP_HEAD + id + Urls.FLAGSHIP_END, tClass, onError, onSucceed);
+        Log.d("LLLLLLLL", Urls.FLAGSHIP_HEAD + id + Urls.FLAGSHIP_END);
+    }
     /**
      * 设计师作品(recyclerView的数据)
      *
@@ -131,8 +133,6 @@ public class NetRequest {
         getRequestAsync(Urls.DESIGNER_WORKS_URL_HEAD + id + Urls.DESIGNER_WORKS_URL_END, t, onError, onSucceed);
 
     }
-
-
     /**
      * 设计师作品详情
      *
@@ -154,7 +154,13 @@ public class NetRequest {
 
 
         }
+    //设计师 画报
+    public <T> void getPictorialBean( String id, Class<T> t, NetListener.OnSucceed<T> onSucceed, NetListener.OnError onError) {
 
+        getRequestAsync(Urls.PICTORIAL_HEAD + id + Urls.PICTORIAL_END, t, onError, onSucceed);
+
+
+    }
 
 
     public <T> void getDiscoverDtailInformation(int value,String id,  Class<T> t, NetListener.OnSucceed<T> onSucceed, NetListener.OnError onError) {

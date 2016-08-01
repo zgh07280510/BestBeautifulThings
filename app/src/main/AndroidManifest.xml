@@ -19,10 +19,10 @@
         </activity>
         <activity android:name=".homepage.HomePageActivity" />
 
-        <activity android:name=".designer.DesignerInformationActivity"/>
+        <activity android:name=".designer.activity.DesignerInformationActivity"/>
         <activity android:name=".magazine.magazinedetail.MagazineActivity" />
         <activity android:name=".discover.discoverdetail.DiscoverDetailActivity"/>
-
+        <activity android:name=".designer.activity.BuyOnlineActivity"/>
 
     </application>
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <ScrollView
@@ -23,27 +23,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="340dp">
 
-
-
-
                     <android.support.v4.view.ViewPager
                         android:id="@+id/designer_information_viewPager"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="#eedd" />
+                         />
+
                     <Button
                         android:id="@+id/btn_designer_information_back"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="@dimen/twenty_five_dp"
+                        android:layout_height="@dimen/twenty_five_dp"
                         android:layout_marginLeft="@dimen/rb_marginbottom"
                         android:layout_marginTop="@dimen/rb_marginbottom"
-                        android:background="@mipmap/abc_ic_ab_back_mtrl_am_alpha" />
+                        android:background="@mipmap/ic_circle_back_normal" />
+
                     <LinearLayout
                         android:id="@+id/image_viewGroup"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_horizontal"/>
+                        android:layout_marginTop="@dimen/twenty_dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal" />
                 </RelativeLayout>
 
                 <cn.carbs.android.avatarimageview.library.AvatarImageView
@@ -63,7 +63,7 @@
                 android:layout_marginTop="@dimen/rb_marginbottom"
                 android:gravity="center"
                 android:textColor="@android:color/black"
-                android:textSize="15sp"/>
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/tv_label"
@@ -72,48 +72,64 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/five_dp"
                 android:gravity="center"
-                android:textSize="@dimen/ten_sp"/>
+                android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/tv_concept"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/twenty_dp"
+                android:layout_marginRight="@dimen/twenty_dp"
                 android:layout_marginTop="@dimen/rb_marginbottom"
                 android:gravity="center"
-                android:layout_marginRight="@dimen/twenty_dp"
-                android:layout_marginLeft="@dimen/twenty_dp"/>
+                android:textSize="15sp"/>
 
             <Button
                 android:layout_width="80dp"
                 android:layout_height="35dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/rb_marginbottom"
                 android:background="@android:color/black"
                 android:text="@string/attention"
-                android:textColor="@android:color/white"
-                android:layout_marginTop="@dimen/rb_marginbottom"/>
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:id="@+id/tv_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="11sp"
-                android:layout_marginLeft="@dimen/five_dp"
-                android:layout_marginRight="@dimen/five_dp"
+                android:layout_marginLeft="@dimen/fifteen_dp"
+                android:layout_marginRight="@dimen/fifteen_dp"
                 android:layout_marginTop="@dimen/five_dp"
-                android:paddingTop="@dimen/rb_marginbottom"/>
+                android:paddingTop="@dimen/rb_marginbottom"
+                android:textSize="14sp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textColor="@android:color/black"/>
+
+            <CheckBox
+                android:id="@+id/cb_down_up"
+                android:layout_width="@dimen/rb_marginbottom"
+                android:layout_height="@dimen/rb_marginbottom"
+                android:background="@drawable/select_down_up"
+                android:button="@null"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/fifteen_dp"/>
+
             <android.support.design.widget.TabLayout
-                  android:background="@android:color/black"
                 android:id="@+id/works_tabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@android:color/black"
                 app:tabSelectedTextColor="@android:color/white"
-                app:tabTextColor="#5F5F5F"/>
+                app:tabTextColor="#5F5F5F"
+                android:layout_marginTop="@dimen/five_dp"/>
+
             <android.support.v4.view.ViewPager
                 android:id="@+id/introduce_viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="1000dp"
-                android:background="@android:color/black"/>
+                android:background="@android:color/black" />
 
             <!--app:tabSelectedTextColor="@android:color/white"-->
             <!--app:tabIndicatorColor="@android:color/white"-->

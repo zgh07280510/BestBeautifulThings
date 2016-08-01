@@ -9,7 +9,7 @@ import android.widget.Toast;
 import com.lanou.bestbeautifulthings.R;
 import com.lanou.bestbeautifulthings.base.BaseFragment;
 import com.lanou.bestbeautifulthings.base.MyApp;
-import com.lanou.bestbeautifulthings.designer.DesignerInformationActivity;
+import com.lanou.bestbeautifulthings.designer.activity.DesignerInformationActivity;
 import com.lanou.bestbeautifulthings.designer.view.GridViewPullToRefreshView;
 import com.lanou.bestbeautifulthings.designer.adapter.DesignerAdapter;
 import com.lanou.bestbeautifulthings.designer.bean.DesignerBean;

@@ -1,4 +1,4 @@
-package com.lanou.bestbeautifulthings.designer;
+package com.lanou.bestbeautifulthings.designer.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -43,6 +44,7 @@ public class DesignerInformationActivity extends BaseActivity implements View.On
     private DesignerInformationBean designerInformationBean;
     private ImageView[] imageViews;
     private ViewGroup viewGroup;
+    private CheckBox cbDownUp;
 
     @Override
     public int setLayout() {
@@ -61,11 +63,13 @@ public class DesignerInformationActivity extends BaseActivity implements View.On
         tvName = (TextView) findViewById(R.id.tv_designer_name);
         tabLayout = (TabLayout) findViewById(R.id.works_tabLayout);
         introduceViewPager = (ViewPager) findViewById(R.id.introduce_viewPager);
+        cbDownUp = (CheckBox) findViewById(R.id.cb_down_up);
     }
 
     @Override
     protected void initData() {
         btnBack.setOnClickListener(this);
+        cbDownUp.setOnClickListener(this);
         initFragment();
         introduceFragmentAdapter = new IntroduceFragmentAdapter(getSupportFragmentManager());
         introduceFragmentAdapter.setFragments(fragments);
@@ -78,7 +82,7 @@ public class DesignerInformationActivity extends BaseActivity implements View.On
                 Glide.with(MyApp.getContext()).load(result.getData().getAvatar_url()).centerCrop().crossFade().into(ivDesignerHead);
                 tvName.setText(result.getData().getName());
                 tvLabel.setText(result.getData().getLabel());
-                tvConcept.setText(result.getData().getConcept());
+                tvConcept.setText("“ "+result.getData().getConcept()+" ”");
                 tvDescription.setText(result.getData().getDescription());
                 designerInformationBean = result;
                 IntroduceImagesAdapter introduceImagesAdapter = new IntroduceImagesAdapter(MyApp.getContext());
@@ -95,7 +99,7 @@ public class DesignerInformationActivity extends BaseActivity implements View.On
                         image.setBackgroundResource(R.mipmap.abc_btn_rating_star_off_mtrl_alpha);
                     }
                     imageViews[i] = image;
-                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(new ViewGroup.LayoutParams(10,10));
+                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(new ViewGroup.LayoutParams(25,25));
                     viewGroup.addView(image,layoutParams);
 
 
@@ -107,7 +111,7 @@ public class DesignerInformationActivity extends BaseActivity implements View.On
             public void onError() {
             }
         });
-//调用实现轮播的方法
+        //调用实现滑动的方法
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -145,9 +149,15 @@ public class DesignerInformationActivity extends BaseActivity implements View.On
         IntroduceFragment introduceFragment = new IntroduceFragment();
         introduceFragment.setArguments(bundle);
         fragments.add(introduceFragment);
-        fragments.add(new FlagshipShopFragment());
-        fragments.add(new PictorialFragment());
-        fragments.add(new BuyOnLineFragment());
+        PictorialFragment pictorialFragment = new PictorialFragment();
+        FlagshipShopFragment flagshipShopFragment = new FlagshipShopFragment();
+        BuyOnLineFragment buyOnLineFragment = new BuyOnLineFragment();
+        pictorialFragment.setArguments(bundle);
+        flagshipShopFragment.setArguments(bundle);
+        buyOnLineFragment.setArguments(bundle);
+        fragments.add(pictorialFragment);
+        fragments.add(flagshipShopFragment);
+        fragments.add(buyOnLineFragment);
     }
 
     @Override
@@ -155,6 +165,13 @@ public class DesignerInformationActivity extends BaseActivity implements View.On
         switch (v.getId()) {
             case R.id.btn_designer_information_back:
                 finish();
+                break;
+            case R.id.cb_down_up:
+             if (cbDownUp.isChecked() == false){
+                 tvDescription.setMaxLines(2);
+             }else {
+                 tvDescription.setMaxLines(20);
+             }
                 break;
         }
     }
