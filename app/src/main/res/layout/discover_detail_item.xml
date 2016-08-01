@@ -2,77 +2,84 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main"
     >
     <ImageView
-        android:id="@+id/discover_cover_iv"
-        android:layout_width="match_parent"
+        android:id="@+id/discover_detail_cover_iv"
+        android:layout_width="420dp"
         android:layout_height="300dp"
+        android:scaleType="fitXY"
         android:src="@mipmap/ic_launcher"/>
-    <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:alpha="0.7"
+        android:background="@drawable/shap_discover">
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:id="@+id/discover_detail_date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:visibility="gone"/>
+        <TextView
+            android:id="@+id/discover_detail_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            />
+    </LinearLayout>
 
+    <TextView
         android:id="@+id/discover_digest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="哈哈哈哈哈"
-        android:layout_alignBottom="@id/discover_cover_iv"
-        android:layout_centerHorizontal="true"/>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:gravity="center"
+        android:alpha="0.6"
+        android:layout_marginBottom="@dimen/five_dp"
+        android:layout_alignBottom="@id/discover_detail_cover_iv"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/shap_discover"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
         android:background="#000000"
-        android:layout_below="@+id/discover_cover_iv">
-        <ImageView
+        android:orientation="horizontal"
+        android:layout_below="@+id/discover_detail_cover_iv"
+       >
+        <com.lanou.bestbeautifulthings.util.XCRoundImageView
             android:id="@+id/user_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="fitXY"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="12dp"
+            />
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"
-            android:layout_marginLeft="15dp"
-            android:layout_centerVertical="true"/>
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp">
         <TextView
-            android:layout_marginLeft="10dp"
             android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/user_image"
-            android:text="haha"
             android:textColor="#ffffff"
-            android:layout_alignTop="@+id/user_image"/>
+            android:layout_marginTop="5dp"/>
         <TextView
-            android:layout_marginLeft="10dp"
             android:id="@+id/user_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="hahaa"
             android:textColor="#ffffff"
-            android:layout_toRightOf="@id/user_image"
-            android:layout_below="@+id/user_name"
-            android:layout_alignBottom="@+id/user_image"/>
-        <ImageView
-            android:id="@+id/user_like_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:src="@mipmap/ic_launcher"
-            android:layout_marginRight="15dp"
-            android:layout_centerVertical="true"/>
+            android:layout_marginTop="5dp"
+            />
+        </LinearLayout>
         <TextView
-            android:id="@+id/lines"
-            android:layout_width="0.7dp"
-            android:layout_height="30dp"
-            android:background="#ffffff"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/user_like_iv"
-            android:layout_marginRight="15dp"/>
-        <ImageView
-            android:id="@+id/user_dislike_iv"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/lines"
-            android:src="@mipmap/ic_launcher"
-            android:layout_marginRight="15dp"
-            android:layout_centerVertical="true"/>
+            android:layout_weight="1"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

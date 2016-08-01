@@ -10,7 +10,7 @@ import android.widget.RadioButton;
 import com.lanou.bestbeautifulthings.R;
 import com.lanou.bestbeautifulthings.base.BaseActivity;
 import com.lanou.bestbeautifulthings.designer.fragment.DesignerFragment;
-import com.lanou.bestbeautifulthings.discover.DiscoverFragment;
+import com.lanou.bestbeautifulthings.discover.discovermain.DiscoverMainFragment;
 import com.lanou.bestbeautifulthings.magazine.MagazineFragment;
 import com.lanou.bestbeautifulthings.mine.MineFragment;
 
@@ -19,6 +19,7 @@ import com.lanou.bestbeautifulthings.mine.MineFragment;
  */
 public class HomePageActivity extends BaseActivity implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
     private RadioButton magazineRb, discoverRb, designerRb, mineRb;
+
 
     @Override
     public int setLayout() {
@@ -31,6 +32,7 @@ public class HomePageActivity extends BaseActivity implements CompoundButton.OnC
         discoverRb = (RadioButton) findViewById(R.id.rb_discover);
         designerRb = (RadioButton) findViewById(R.id.rb_designer);
         mineRb = (RadioButton) findViewById(R.id.rb_mine);
+
     }
 
     @Override
@@ -52,6 +54,9 @@ public class HomePageActivity extends BaseActivity implements CompoundButton.OnC
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.homepage_framelayout, new MagazineFragment());
         fragmentTransaction.commit();
+
+
+
     }
 
     @Override
@@ -75,7 +80,7 @@ public class HomePageActivity extends BaseActivity implements CompoundButton.OnC
                 break;
             case R.id.rb_discover:
 
-                fragmentTransaction.replace(R.id.homepage_framelayout, new DiscoverFragment());
+                fragmentTransaction.replace(R.id.homepage_framelayout, new DiscoverMainFragment());
                 break;
             case R.id.rb_designer:
                 fragmentTransaction.replace(R.id.homepage_framelayout, new DesignerFragment());
