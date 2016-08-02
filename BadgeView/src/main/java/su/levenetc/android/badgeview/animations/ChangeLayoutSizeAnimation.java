@@ -9,7 +9,7 @@ import android.view.animation.Transformation;
 /**
  * Created by Eugene Levenetc.
  */
-public class ChangeLayoutSizeAnimation extends Animation {
+public class  ChangeLayoutSizeAnimation extends Animation {
 
 	private final int initialHeight;
 	private int width = -1;
