@@ -101,7 +101,7 @@ public class LoadPopu {
         });
 
 
-        popupWindow = new PopupWindow(view, DisplayUtil.px2dip(context,4500), DisplayUtil.px2dip(context,5800), false) {
+        popupWindow = new PopupWindow(view, DisplayUtil.px2dip(context,4500.0f), DisplayUtil.px2dip(context,5800.0f), false) {
             @Override
             public void dismiss() {
                 super.dismiss();
