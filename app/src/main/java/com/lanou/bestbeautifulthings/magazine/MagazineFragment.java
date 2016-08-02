@@ -82,7 +82,6 @@ public class MagazineFragment extends BaseFragment {
                         datum.setSub_title(subTitle);
                         mEntries.add(0, datum);
                     }
-
                     //  mDefaultThumbnail = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
                     //       mDefaultHeaderIcon = getResources().getDrawable(R.mipmap.ic_launcher);
                     mDeckView = new DeckView<Datum>(context);
