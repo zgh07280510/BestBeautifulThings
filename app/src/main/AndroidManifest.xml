@@ -42,15 +42,14 @@
             </intent-filter>
         </activity>
 
-<<<<<<< HEAD
+
         <activity android:name=".designer.activity.DesignerInformationActivity"/>
-=======
-        <activity android:name=".designer.DesignerInformationActivity"/>
+
 
         <activity
             android:name=".homepage.HomePageActivity"
             android:launchMode="singleTask" />
->>>>>>> eedbc08c69ff79f6d0a7680a1137d7cae4b639a7
+
         <activity android:name=".magazine.magazinedetail.MagazineActivity" />
 
         <activity android:name=".magazine.magazinedetail.comment.CommentActivity" />
