@@ -1,5 +1,8 @@
 package com.lanou.bestbeautifulthings.designer;
 
+import com.lanou.bestbeautifulthings.base.MyApp;
+import com.litesuits.orm.LiteOrm;
+
 /**
  * Created by dllo on 16/8/2.
  */
@@ -12,7 +15,8 @@ public class SingleLiteOrm {
     }
 
     private SingleLiteOrm() {
-        liteOrm = LiteOrm.newCascadeInstance(MyApplication.getContext(),"SearchHistory.db");
+       liteOrm = LiteOrm.newCascadeInstance(MyApp.getContext(),"" +
+               "Designer.db");
 
     }
 
