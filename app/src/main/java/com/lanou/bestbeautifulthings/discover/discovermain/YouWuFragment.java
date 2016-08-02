@@ -62,7 +62,6 @@ public class YouWuFragment extends BaseFragment implements OnRefreshListener {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent intent = new Intent(context, DiscoverDetailActivity.class);
                         mId = String.valueOf(bean.getData().getActivities().get(position-1).getProduct().getId());
-                        Log.d("YouWuFragment****", mId);
                         intent.putExtra("id",mId);
 
                         context.startActivity(intent);
