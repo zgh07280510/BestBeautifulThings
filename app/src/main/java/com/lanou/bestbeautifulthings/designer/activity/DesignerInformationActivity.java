@@ -1,5 +1,6 @@
 package com.lanou.bestbeautifulthings.designer.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -75,6 +76,7 @@ public class DesignerInformationActivity extends BaseActivity implements View.On
         introduceFragmentAdapter.setFragments(fragments);
         introduceViewPager.setAdapter(introduceFragmentAdapter);
         tabLayout.setupWithViewPager(introduceViewPager);
+        tabLayout.setSelectedTabIndicatorColor(Color.TRANSPARENT);
         String id = String.valueOf(getIntent().getIntExtra("id", 0));
         NetRequest.getInstance().getDesignerInformationBean(id, DesignerInformationBean.class, new NetListener.OnSucceed<DesignerInformationBean>() {
             @Override

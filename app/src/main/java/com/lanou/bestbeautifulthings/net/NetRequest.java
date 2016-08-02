@@ -117,7 +117,6 @@ public class NetRequest {
     //旗舰店和网上购买
     public <T> void getFlagshipAndBuyOnlineBean(String id, Class<T> tClass, NetListener.OnSucceed<T> onSucceed, NetListener.OnError onError) {
         getRequestAsync(Urls.FLAGSHIP_HEAD + id + Urls.FLAGSHIP_END, tClass, onError, onSucceed);
-        Log.d("LLLLLLLL", Urls.FLAGSHIP_HEAD + id + Urls.FLAGSHIP_END);
     }
     /**
      * 设计师作品(recyclerView的数据)
