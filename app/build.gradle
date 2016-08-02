@@ -54,10 +54,7 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.3.2'
     compile 'com.youth.banner:banner:1.1.6'
     compile 'com.youth.banner:banner:+'
-<<<<<<< HEAD
     compile files('libs/lite-orm-1.9.1.jar')
-=======
     compile project(':BadgeView')
->>>>>>> 18a57b74eb22a7ad339e67e5b001b06394999eef
 
 }
