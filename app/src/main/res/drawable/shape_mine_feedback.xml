@@ -4,5 +4,9 @@
     <solid android:color="#000000" >
     </solid>
     <!-- 矩形的圆角半径 -->
+<<<<<<< HEAD
     <corners android:radius="50dp" />
+=======
+    <corners android:radius="100dp" />
+>>>>>>> develop
 </shape>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="375dp">
+
+        <ImageView
+            android:id="@+id/iv_recommend_big"
+            android:layout_width="match_parent"
+            android:layout_height="225dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_below="@id/iv_recommend_big"
+            android:background="@android:color/black"
+            android:orientation="vertical" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <cn.carbs.android.avatarimageview.library.AvatarImageView
+                android:id="@+id/iv_avatar"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="195dp"
+                app:aiv_BoarderWidth="2dp"
+                app:aiv_TextSizeRatio="0.4"
+                app:aiv_ShowBoarder="false"/>
+
+            <TextView
+                android:id="@+id/tv_recommend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:text="Jen Rub  Stephanie Korey"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_originator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/designer"
+                android:layout_marginTop="5dp"
+                android:textColor="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/iv_attention"
+                android:layout_width="80dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="@string/attention"
+                android:textSize="10sp"
+                android:textColor="@color/buttonColor"
+                android:background="@drawable/button_shape"
+                android:gravity="center"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>
