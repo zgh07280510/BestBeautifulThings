@@ -3,13 +3,9 @@ package com.lanou.bestbeautifulthings.net;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.renderscript.Sampler;
 import android.util.Log;
-
 import com.google.gson.Gson;
-
 import java.io.IOException;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -20,7 +16,6 @@ import okhttp3.Response;
  * Created by dllo on 16/7/26.
  */
 public class NetRequest {
-//喝喝酒高科技
     private static NetRequest netRequest;
     public OkHttpClient client;
     private Gson gson;
