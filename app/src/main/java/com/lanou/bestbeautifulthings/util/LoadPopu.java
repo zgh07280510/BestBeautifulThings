@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.BitmapDrawable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -99,30 +100,6 @@ public class LoadPopu {
             }
         });
 
-        weixinLayout = (LinearLayout) view.findViewById(R.id.weichat_layout);
-        weixinLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Platform weixin = ShareSDK.getPlatform(Wechat.NAME);
-                weixin.setPlatformActionListener(new PlatformActionListener() {
-                    @Override
-                    public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
-
-                    }
-
-                    @Override
-                    public void onError(Platform platform, int i, Throwable throwable) {
-
-                    }
-
-                    @Override
-                    public void onCancel(Platform platform, int i) {
-
-                    }
-                });
-                weixin.authorize();
-            }
-        });
 
         popupWindow = new PopupWindow(view, DisplayUtil.px2dip(context,4500), DisplayUtil.px2dip(context,5800), false) {
             @Override
@@ -152,6 +129,7 @@ public class LoadPopu {
         userSinaInfo.setUserSinaId(sina.getDb().getUserId());
         userSinaInfo.setUserSinaImagUrl(sina.getDb().getUserIcon());
         userSinaInfo.setUserSinaName(sina.getDb().getUserName());
+        Log.d("LoadPopu", userSinaInfo.getUserSinaId());
         return userSinaInfo;
 
     }
