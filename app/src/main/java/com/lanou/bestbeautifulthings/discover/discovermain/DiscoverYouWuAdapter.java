@@ -7,16 +7,15 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.lanou.bestbeautifulthings.R;
-import com.lanou.bestbeautifulthings.discover.discovermain.DiscoverBean;
 import com.lanou.bestbeautifulthings.util.XCRoundImageView;
 import com.squareup.picasso.Picasso;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+
 
 
 /**
@@ -25,13 +24,13 @@ import java.util.Date;
 public class DiscoverYouWuAdapter extends BaseAdapter  {
     private DiscoverBean datas;
     private Context context;
+    private DetailViewHolder holder = null;
 
     public DiscoverYouWuAdapter(Context context) {
         this.context = context;
     }
 
     public void setDatas(DiscoverBean datas) {
-
         this.datas = datas;
         notifyDataSetChanged();
     }
@@ -55,7 +54,7 @@ public class DiscoverYouWuAdapter extends BaseAdapter  {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        DetailViewHolder holder = null;
+
         if (convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.discover_detail_item,parent,false);
             holder = new DetailViewHolder(convertView);
@@ -72,8 +71,6 @@ public class DiscoverYouWuAdapter extends BaseAdapter  {
         }else {
             holder.dateTv.setVisibility(View.GONE);
             holder.weekTv.setVisibility(View.GONE);
-
-
         }
 
         holder.userlabelTv.setText(datas.getData().getActivities().get(position).getDesigner().getLabel());
@@ -81,6 +78,7 @@ public class DiscoverYouWuAdapter extends BaseAdapter  {
         Picasso.with(context).load(datas.getData().getActivities().get(position).getDesigner().getAvatar_url()).resize(480,320).into(holder.userIv);
         Glide.with(context).load(datas.getData().getActivities().get(position).getImages().get(0)).into(holder.coverIv);
         holder.digestTv.setText(datas.getData().getActivities().get(position).getDigest());
+
         return convertView;
     }
     class DetailViewHolder{
@@ -89,6 +87,7 @@ public class DiscoverYouWuAdapter extends BaseAdapter  {
         XCRoundImageView userIv;
         TextView userNameTv;
         TextView userlabelTv;
+
         public DetailViewHolder(View view){
             coverIv = (ImageView) view.findViewById(R.id.discover_detail_cover_iv);
             digestTv = (TextView) view.findViewById(R.id.discover_digest);
@@ -97,6 +96,7 @@ public class DiscoverYouWuAdapter extends BaseAdapter  {
             userlabelTv = (TextView) view.findViewById(R.id.user_label);
             dateTv = (TextView) view.findViewById(R.id.discover_detail_date_tv);
             weekTv = (TextView) view.findViewById(R.id.discover_detail_week);
+
         }
 
     }
@@ -141,9 +141,7 @@ public class DiscoverYouWuAdapter extends BaseAdapter  {
         }
         return week;
     }
-    public static String dateToString(Date data, String formatType) {
-        return new SimpleDateFormat(formatType).format(data);
-    }
+
     public static String GetStringFromLong(long millis)
     {
         SimpleDateFormat sdf= new SimpleDateFormat("yyyy.MM.dd");
