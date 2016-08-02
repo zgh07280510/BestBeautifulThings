@@ -140,21 +140,7 @@ public class LoadPopu {
         popupWindow.setInputMethodMode(popupWindow.INPUT_METHOD_NEEDED);
         popupWindow.showAtLocation(view, Gravity.CENTER, Gravity.CENTER, DisplayUtil.px2dip(context,200));
     }
-    public static UserInfo getQQUserInfo(){
-        UserInfo userQQInfo = new UserInfo();
-        userQQInfo.setUserQQId(qq.getDb().getUserId());
-        userQQInfo.setUserQQImageUrl(qq.getDb().getUserIcon());
-        userQQInfo.setUserQQName(qq.getDb().getUserName());
-        return userQQInfo;
-    }
-    public static UserInfo getSinaUserInfo(){
-        UserInfo userSinaInfo = new UserInfo();
-        userSinaInfo.setUserSinaId(sina.getDb().getUserId());
-        userSinaInfo.setUserSinaImagUrl(sina.getDb().getUserIcon());
-        userSinaInfo.setUserSinaName(sina.getDb().getUserName());
-        return userSinaInfo;
 
-    }
 
 
 }

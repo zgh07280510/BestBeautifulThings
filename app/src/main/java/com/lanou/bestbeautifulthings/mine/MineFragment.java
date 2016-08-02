@@ -51,14 +51,16 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         ShareSDK.initSDK(context);
         qq = ShareSDK.getPlatform(QQ.NAME);
         weibo = ShareSDK.getPlatform(SinaWeibo.NAME);
+
         if (qq.isValid()) {
-            Picasso.with(context).load(LoadPopu.getQQUserInfo().getUserQQImageUrl()).into(iconIv);
+            Picasso.with(context).load(qq.getDb().getUserIcon()).into(iconIv);
             userName.setText(qq.getDb().getUserName());
         }
         if (weibo.isValid()){
-            Picasso.with(context).load(LoadPopu.getSinaUserInfo().getUserSinaImagUrl()).into(iconIv);
+            Picasso.with(context).load(weibo.getDb().getUserIcon()).into(iconIv);
             userName.setText(weibo.getDb().getUserName());
         }
+
         iconIv.setOnClickListener(this);
         setting.setOnClickListener(this);
         receiver = new UserBrodCastReceiver();
@@ -105,8 +107,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            Picasso.with(context).load(LoadPopu.getQQUserInfo().getUserQQImageUrl()).into(iconIv);
-            userName.setText(LoadPopu.getQQUserInfo().getUserQQName());
+            Picasso.with(context).load(qq.getDb().getUserIcon()).into(iconIv);
+            userName.setText(qq.getDb().getUserName());
             Toast.makeText(context, "登录成功", Toast.LENGTH_SHORT).show();
 
 
@@ -117,8 +119,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
             @Override
             public void onReceive(Context context, Intent intent) {
-                Picasso.with(context).load(LoadPopu.getSinaUserInfo().getUserSinaImagUrl()).into(iconIv);
-                userName.setText(LoadPopu.getSinaUserInfo().getUserSinaName());
+                Picasso.with(context).load(weibo.getDb().getUserIcon()).into(iconIv);
+                userName.setText(weibo.getDb().getUserName());
                 Toast.makeText(context, "登录成功", Toast.LENGTH_SHORT).show();
             }
         }
