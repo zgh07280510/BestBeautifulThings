@@ -31,7 +31,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="185dp"
+                android:layout_marginTop="195dp"
                 app:aiv_BoarderWidth="2dp"
                 app:aiv_TextSizeRatio="0.4"
                 app:aiv_ShowBoarder="false"/>
@@ -56,7 +56,7 @@
                 android:textColor="@android:color/darker_gray" />
 
             <TextView
-                android:id="@+id/iv_attention"
+                android:id="@+id/tv_attention"
                 android:layout_width="80dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center_horizontal"

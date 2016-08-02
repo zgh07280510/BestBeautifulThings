@@ -3,13 +3,9 @@ package com.lanou.bestbeautifulthings.net;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.renderscript.Sampler;
 import android.util.Log;
-
 import com.google.gson.Gson;
-
 import java.io.IOException;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -20,7 +16,6 @@ import okhttp3.Response;
  * Created by dllo on 16/7/26.
  */
 public class NetRequest {
-//喝喝酒高科技
     private static NetRequest netRequest;
     public OkHttpClient client;
     private Gson gson;
@@ -112,11 +107,12 @@ public class NetRequest {
      * @param <T>
      */
     public <T> void getDesignerInformationBean(String id, Class<T> tClass, NetListener.OnSucceed<T> onSucceed, NetListener.OnError onError) {
-
         getRequestAsync(Urls.DESIGNER_INFORMATION_URL_HEAD + id + Urls.DESIGNER_INFORMATION_URL_END, tClass, onError, onSucceed);
-
     }
-
+    //旗舰店和网上购买
+    public <T> void getFlagshipAndBuyOnlineBean(String id, Class<T> tClass, NetListener.OnSucceed<T> onSucceed, NetListener.OnError onError) {
+        getRequestAsync(Urls.FLAGSHIP_HEAD + id + Urls.FLAGSHIP_END, tClass, onError, onSucceed);
+    }
     /**
      * 设计师作品(recyclerView的数据)
      *
@@ -131,8 +127,6 @@ public class NetRequest {
         getRequestAsync(Urls.DESIGNER_WORKS_URL_HEAD + id + Urls.DESIGNER_WORKS_URL_END, t, onError, onSucceed);
 
     }
-
-
     /**
      * 设计师作品详情
      *
@@ -154,7 +148,13 @@ public class NetRequest {
 
 
         }
+    //设计师 画报
+    public <T> void getPictorialBean( String id, Class<T> t, NetListener.OnSucceed<T> onSucceed, NetListener.OnError onError) {
 
+        getRequestAsync(Urls.PICTORIAL_HEAD + id + Urls.PICTORIAL_END, t, onError, onSucceed);
+
+
+    }
 
 
     public <T> void getDiscoverDtailInformation(int value,String id,  Class<T> t, NetListener.OnSucceed<T> onSucceed, NetListener.OnError onError) {
