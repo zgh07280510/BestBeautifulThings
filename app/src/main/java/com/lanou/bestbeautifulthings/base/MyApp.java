@@ -14,8 +14,8 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Bmob.initialize(context, "17ebad504652156df5be753753517ac0");
         context = this;
-       //Bmob.initialize(this, "bf911a696fcf6c0d7321f0ad0912faff");
     }
 
     public static Context getContext() {

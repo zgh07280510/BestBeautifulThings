@@ -36,7 +36,6 @@ public class LoadPopu {
     private static View view;
     private static LinearLayout sinaLayout;
     private static LinearLayout qqLayout;
-    private static LinearLayout weixinLayout;
     private static Platform qq;
     private static Platform sina;
 
