@@ -37,12 +37,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
+
             <com.lanou.bestbeautifulthings.magazine.magazinedetail.htmltextview.HtmlTextView
                 android:id="@+id/magazine_detail_tv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColor="#404040"></com.lanou.bestbeautifulthings.magazine.magazinedetail.htmltextview.HtmlTextView>
-
+                android:textColor="#404040"/>
         </LinearLayout>
 
     </ScrollView>

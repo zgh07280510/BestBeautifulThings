@@ -5,7 +5,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
 import android.text.method.ScrollingMovementMethod;
+import android.text.style.ImageSpan;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -20,6 +24,7 @@ import com.lanou.bestbeautifulthings.R;
 import com.lanou.bestbeautifulthings.base.BaseActivity;
 import com.lanou.bestbeautifulthings.magazine.Datum;
 import com.lanou.bestbeautifulthings.magazine.magazinedetail.htmltextview.HtmlTextView;
+import com.lanou.bestbeautifulthings.magazine.magazinedetail.magazineimage.MessageSpan;
 import com.lanou.bestbeautifulthings.util.RoundDrawable;
 
 import cn.sharesdk.framework.ShareSDK;
@@ -83,7 +88,7 @@ public class MagazineActivity extends BaseActivity implements View.OnClickListen
         String subTitle = magBean.getSub_title();
         String titleImg = magBean.getLink();
         //设置 图文混排
-        contentTv.setHtmlFromString(content, false);
+        contentTv.setHtmlFromString(content);
 
 
         //设置头标题
@@ -95,7 +100,7 @@ public class MagazineActivity extends BaseActivity implements View.OnClickListen
         setbottomIcon();
         //设置用户头像圆形图片
         settitleIcon();
-        contentTv.setMovementMethod(ScrollingMovementMethod.getInstance());
+     //   contentTv.setMovementMethod(ScrollingMovementMethod.getInstance());
         mMagazineScroll.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -148,6 +153,9 @@ public class MagazineActivity extends BaseActivity implements View.OnClickListen
         mDesignerRv.setOnClickListener(this);
         mCommentIv.setOnClickListener(this);
         shareIv.setOnClickListener(this);
+     //   contentTv.setOnClickListener(this);
+
+
     }
 
     private void settitleIcon() {
@@ -206,7 +214,7 @@ public class MagazineActivity extends BaseActivity implements View.OnClickListen
                 break;
 
             case R.id.magazine_detail_share:
-                ShareSDK.initSDK(this);
+                ShareSDK.initSDK(getApplicationContext());
                 OnekeyShare oks = new OnekeyShare();
                 //关闭sso授权
                 oks.disableSSOWhenAuthorize();
@@ -226,14 +234,40 @@ public class MagazineActivity extends BaseActivity implements View.OnClickListen
                 // comment是我对这条分享的评论，仅在人人网和QQ空间使用
                 oks.setComment("我是测试评论文本");
                 // site是分享此内容的网站名称，仅在QQ空间使用
-                oks.setSite(getString(R.string.app_name));
+                    oks.setSite(getString(R.string.app_name));
                 // siteUrl是分享此内容的网站地址，仅在QQ空间使用
                 oks.setSiteUrl("http://sharesdk.cn");
 
 // 启动分享GUI
-                oks.show(this);
+                oks.show(getApplicationContext());
+
+                break;
+
+            case R.id.magazine_detail_tv:
+
 
                 break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.d("Sysout","onDestory");
+        setContentView(R.layout.empty);
+         RelativeLayout titleBarRv = null;
+         ImageView bottomIconIv = null;
+         ImageView titleIconIv = null;
+         HtmlTextView contentTv = null;
+         TextView mHeadTitleTv = null;
+         TextView mHeadAuthorTv = null;
+         ImageView mHeadImg = null;
+         ScrollView mMagazineScroll = null;
+         ImageView mBackIv = null;
+         RelativeLayout mDesignerRv = null;
+         ImageView mCommentIv = null;
+         ImageView shareIv = null;
+        System.gc();
+        System.exit(0);
+        super.onDestroy();
     }
 }

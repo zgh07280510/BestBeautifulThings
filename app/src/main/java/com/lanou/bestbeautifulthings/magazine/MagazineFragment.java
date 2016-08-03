@@ -120,6 +120,7 @@ public class MagazineFragment extends BaseFragment {
                         public void onItemClick(Datum item) {
                             Intent intent = new Intent(context, MagazineActivity.class);
                             intent.putExtra("magBean", item);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                             //    context.startActivity(new Intent(context, MagazineActivity.class));
                         }

@@ -43,7 +43,8 @@
         <activity
             android:name=".homepage.HomePageActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".magazine.magazinedetail.MagazineActivity" />
+        <activity android:name=".magazine.magazinedetail.MagazineActivity"
+            android:process=":picture"/>
         <activity android:name=".magazine.magazinedetail.comment.CommentActivity" />
         <activity
             android:name="com.mob.tools.MobUIShell"
