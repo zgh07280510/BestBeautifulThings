@@ -93,14 +93,14 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                     qq.removeAccount();
                     iconIv.setImageResource(R.mipmap.fffffff);
                     userName.setText("请登录");
-                    Toast.makeText(context, "请登录", Toast.LENGTH_SHORT).show();
+
                 }
                 if (weibo.isValid()) {
                     weibo.removeAccount();
                     iconIv.setImageResource(R.mipmap.fffffff);
                     userName.setText("请登录");
-                    Toast.makeText(context, "请登录", Toast.LENGTH_SHORT).show();
                 }
+                Toast.makeText(context, "请登录", Toast.LENGTH_SHORT).show();
 
                 break;
         }

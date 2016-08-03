@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import com.lanou.bestbeautifulthings.R;
 import com.lanou.bestbeautifulthings.base.BaseActivity;
 import com.lanou.bestbeautifulthings.base.MyApp;
+import com.lanou.bestbeautifulthings.discover.beans.CommentBean;
 import com.lanou.bestbeautifulthings.discover.beans.ShoesBean;
 import com.lanou.bestbeautifulthings.magazine.magazinedetail.MagazineActivity;
 import com.lanou.bestbeautifulthings.net.NetListener;
@@ -19,6 +22,11 @@ import com.lanou.bestbeautifulthings.net.NetRequest;
 import com.lanou.bestbeautifulthings.util.XCRoundImageView;
 import com.squareup.picasso.Picasso;
 import com.youth.banner.Banner;
+
+import java.util.List;
+
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.listener.FindListener;
 
 /**
  * Created by dllo on 16/7/31.
@@ -33,6 +41,11 @@ public class DiscoverDetailActivity extends BaseActivity {
     private String id = "693";
     private DetailactivityTitleAdapter tAdapter;
     private NoScrollGridView mListView;
+    private LinearLayout commentLayout;
+    private EditText editText;
+    private String cId;
+    private TextView countTv;
+
 
     @Override
     public int setLayout() {
@@ -41,6 +54,9 @@ public class DiscoverDetailActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        countTv = (TextView) findViewById(R.id.discover_comment_count);
+        editText = (EditText) findViewById(R.id.discover_detail_et);
+        commentLayout = (LinearLayout) findViewById(R.id.discover_detail_comment_layout);
         banner = (Banner) findViewById(R.id.discover_detail_banner);
         digestTv = (TextView) findViewById(R.id.detail_digest);
         userNameTv = (TextView) findViewById(R.id.detail_user_name);
@@ -73,6 +89,8 @@ public class DiscoverDetailActivity extends BaseActivity {
                 conceptTv.setText("“" + bean.getData().getDesigner().getConcept() + "”");
                 detailNameTv.setText(bean.getData().getName());
                 descTv.setText(bean.getData().getDesc());
+                cId = String.valueOf(bean.getData().getDesigner().getId());
+                Log.d("DiscoverDetailActivity", cId);
                 Picasso.with(MyApp.getContext()).load(bean.getData().getDesigner().getAvatar_url()).into(userIv);
                 adapter.setData(bean.getData().getImages());
                 listView.setAdapter(adapter);
@@ -83,7 +101,6 @@ public class DiscoverDetailActivity extends BaseActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent intent1 = new Intent(DiscoverDetailActivity.this, MagazineActivity.class);
                         String mId = String.valueOf(bean.getData().getRefer_articles().get(position).getId());
-                        Log.d("DiscoverDetailActivity", mId);
                         intent1.putExtra("id",mId);
                         startActivity(intent1);
                     }
@@ -95,6 +112,30 @@ public class DiscoverDetailActivity extends BaseActivity {
             @Override
             public void onError() {
 
+            }
+        });
+
+
+        commentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(DiscoverDetailActivity.this,DiscoverCommentActivity.class);
+                intent1.putExtra("content",editText.getText().toString());
+                intent1.putExtra("cId",cId);
+                startActivity(intent1);
+            }
+        });
+        BmobQuery<CommentBean> query = new BmobQuery<>();
+        query.addWhereEqualTo("id",cId);
+        query.findObjects(DiscoverDetailActivity.this, new FindListener<CommentBean>() {
+            @Override
+            public void onSuccess(List<CommentBean> list) {
+                countTv.setText(String.valueOf(list.size()));
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                countTv.setText("0");
             }
         });
     }

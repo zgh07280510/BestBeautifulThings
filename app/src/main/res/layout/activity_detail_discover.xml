@@ -2,9 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="#000000">
+    android:background="#000000"
+    android:orientation="vertical">
 
     <ScrollView
         android:id="@+id/scoll"
@@ -38,22 +37,21 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="#ffffff">
+                    android:background="#ffffff"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/detail_digest"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="#000000"
-                        android:layout_margin="12dp"/>
+                        android:layout_margin="12dp"
+                        android:textColor="#000000" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="230dp"
                         android:layout_margin="7dp"
-                        android:background="@drawable/shap_discover_detail"
-                        >
+                        android:background="@drawable/shap_discover_detail">
 
                         <com.lanou.bestbeautifulthings.util.XCRoundImageView
                             android:id="@+id/detail_user_image"
@@ -61,34 +59,33 @@
                             android:layout_height="60dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="25dp"
-                            android:scaleType="fitXY"
-                             />
+                            android:scaleType="fitXY" />
 
                         <TextView
                             android:id="@+id/detail_user_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/detail_user_image"
+                            android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:textColor="#000000"
-                            android:layout_centerHorizontal="true"/>
+                            android:textColor="#000000" />
 
                         <TextView
                             android:id="@+id/detail_user_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/detail_user_name"
-                            android:layout_marginTop="10dp"
-                            android:layout_centerHorizontal="true"/>
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10dp" />
 
                         <TextView
                             android:id="@+id/detail_user_concept"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/detail_user_label"
-                            android:layout_marginTop="15dp"
                             android:layout_centerHorizontal="true"
-                            android:layout_margin="10dp"/>
+                            android:layout_margin="10dp"
+                            android:layout_marginTop="15dp" />
 
                     </RelativeLayout>
                 </LinearLayout>
@@ -96,35 +93,35 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:background="#FFFFFF"
-                    >
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/detail_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
                         android:textColor="#000000"
-                        android:textSize="20sp"
-                        android:layout_marginLeft="12dp"/>
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/detail_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#000000"
+                        android:layout_marginLeft="12dp"
                         android:layout_marginTop="15dp"
-                        android:layout_marginLeft="12dp"/>
+                        android:textColor="#000000" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#ffffff">
 
-                    <com.lanou.bestbeautifulthings.discover.discoverdetail.NoScrollGridView
-                        android:id="@+id/detail_list_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"/>
+                        <com.lanou.bestbeautifulthings.discover.discoverdetail.NoScrollGridView
+                            android:id="@+id/detail_list_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -133,26 +130,86 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:background="#000000"
-                android:orientation="vertical"
-                android:layout_marginTop="20dp">
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
                     android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="15dp"
                     android:text="相关画报"
                     android:textColor="#ffffff" />
+
                 <com.lanou.bestbeautifulthings.discover.discoverdetail.NoScrollGridView
                     android:id="@+id/magazine_list_view"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
         </LinearLayout>
 
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/shap_discover_detail"
+        android:orientation="horizontal">
+
+        <com.lanou.bestbeautifulthings.util.XCRoundImageView
+            android:id="@+id/discover_bottom_bar_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:src="@mipmap/fffffff" />
+
+        <LinearLayout
+            android:id="@+id/discover_detail_comment_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/discover_detail_et"
+                android:layout_width="210dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/shape_magazine_detail_comment"
+                android:clickable="false"
+                android:hint="说点什么吧" />
+
+            <ImageView
+                android:id="@+id/discover_comment_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="3dp"
+                android:src="@mipmap/article_comment_icon" />
+
+            <TextView
+                android:id="@+id/discover_comment_count"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/pinpai_net"
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:background="#c60707"
+                android:gravity="center"
+                android:text="品牌官网" />
+        </LinearLayout>
+
+    </LinearLayout>
+
 
 </RelativeLayout>

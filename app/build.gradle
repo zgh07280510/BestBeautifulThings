@@ -22,6 +22,11 @@ android {
 
 
     }
+    android {
+        sourceSets {
+            main.jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {
@@ -29,11 +34,15 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile project(':deckview')
-    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+   // compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'cn.carbs.android:AvatarImageView:1.0.2'
     compile 'com.android.support:design:23+'
     compile 'org.greenrobot:eventbus:3.0.0'
+    compile files('libs/Bmob_Push_V0.9beta_20160520.jar')
+    compile files('libs/BmobSDK_V3.4.7_0527.jar')
+    compile files('libs/okhttp-3.2.0.jar')
+    compile files('libs/okio-1.7.0.jar')
     compile files('libs/MobCommons-2016.0707.1708.jar')
     compile files('libs/MobTools-2016.0707.1708.jar')
     compile files('libs/ShareSDK-Core-2.7.4.jar')
@@ -45,7 +54,6 @@ dependencies {
     compile files('libs/ShareSDK-Wechat-Core-2.7.4.jar')
     compile files('libs/ShareSDK-Wechat-Favorite-2.7.4.jar')
     compile files('libs/ShareSDK-Wechat-Moments-2.7.4.jar')
-    compile files('libs/BmobSDK_3.5.1_20160719.jar')
     compile files('libs/gson-2.6.2.jar')
     compile files('libs/rxandroid-1.2.0.jar')
     compile 'com.squareup.picasso:picasso:2.3.2'
