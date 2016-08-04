@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     private Platform qq,weibo;
     private TextView setting;
     private UserSinaReceiver sinaReceiver;
+    private RelativeLayout rlDesignerAttention;
 
 
     @Override
@@ -42,6 +44,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         iconIv = (XCRoundImageView) view.findViewById(R.id.mine_icon);
         userName = (TextView) view.findViewById(R.id.mine_user_name);
         setting = (TextView) view.findViewById(R.id.mine_setting);
+        rlDesignerAttention = (RelativeLayout) view.findViewById(R.id.rl_designer_attention);
 
 
     }
@@ -61,6 +64,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         }
         iconIv.setOnClickListener(this);
         setting.setOnClickListener(this);
+        rlDesignerAttention.setOnClickListener(this);
         receiver = new UserBrodCastReceiver();
         sinaReceiver = new UserSinaReceiver();
         IntentFilter filter = new IntentFilter("load is sucess");
@@ -96,6 +100,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                     userName.setText("请登录");
                 }
 
+                break;
+            case R.id.rl_designer_attention:
+                Intent intent = new Intent(getActivity(),DesignerAttentionActivity.class);
+                startActivity(intent);
                 break;
         }
 

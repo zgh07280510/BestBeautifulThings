@@ -46,9 +46,13 @@ public class PictorialFragment extends BaseFragment {
         NetRequest.getInstance().getPictorialBean(id, PictorialBean.class, new NetListener.OnSucceed<PictorialBean>() {
             @Override
             public void OnSucceed(PictorialBean result) {
-            tvTitle.setText(result.getData().getArticles().get(0).getTitle());
+                  if (result.getData().getArticles().size()>0) {
+                tvTitle.setText(result.getData().getArticles().get(0).getTitle());
                 tvSubTitle.setText(result.getData().getArticles().get(0).getSub_title());
                 Glide.with(context).load(result.getData().getArticles().get(0).getImage_url()).into(ivPic);
+                  }
+
+
             }
         }, new NetListener.OnError() {
             @Override

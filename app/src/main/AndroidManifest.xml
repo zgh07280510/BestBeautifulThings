@@ -76,7 +76,7 @@
 
         <activity android:name=".discover.discoverdetail.DiscoverDetailActivity"/>
         <activity android:name=".designer.activity.BuyOnlineActivity"/>
-
+<activity android:name=".mine.DesignerAttentionActivity"/>
 
     </application>
 
