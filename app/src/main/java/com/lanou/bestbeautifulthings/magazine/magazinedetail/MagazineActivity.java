@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.lanou.bestbeautifulthings.R;
@@ -69,6 +70,7 @@ public class MagazineActivity extends BaseActivity implements View.OnClickListen
         mDesignerRv = (RelativeLayout) findViewById(R.id.designer_rv);
         mCommentIv = (ImageView) findViewById(R.id.comment_iv);
         shareIv = (ImageView) findViewById(R.id.magazine_detail_share);
+
 
         mMagazineScroll = (ScrollView) findViewById(R.id.magazine_detail_scrollview);
 
@@ -214,7 +216,7 @@ public class MagazineActivity extends BaseActivity implements View.OnClickListen
                 break;
 
             case R.id.magazine_detail_share:
-                ShareSDK.initSDK(getApplicationContext());
+                ShareSDK.initSDK(this);
                 OnekeyShare oks = new OnekeyShare();
                 //关闭sso授权
                 oks.disableSSOWhenAuthorize();
@@ -249,25 +251,25 @@ public class MagazineActivity extends BaseActivity implements View.OnClickListen
                 break;
         }
     }
-
-    @Override
-    protected void onDestroy() {
-        Log.d("Sysout","onDestory");
-        setContentView(R.layout.empty);
-         RelativeLayout titleBarRv = null;
-         ImageView bottomIconIv = null;
-         ImageView titleIconIv = null;
-         HtmlTextView contentTv = null;
-         TextView mHeadTitleTv = null;
-         TextView mHeadAuthorTv = null;
-         ImageView mHeadImg = null;
-         ScrollView mMagazineScroll = null;
-         ImageView mBackIv = null;
-         RelativeLayout mDesignerRv = null;
-         ImageView mCommentIv = null;
-         ImageView shareIv = null;
-        System.gc();
-        System.exit(0);
-        super.onDestroy();
-    }
+//
+//    @Override
+//    protected void onDestroy() {
+//        Log.d("Sysout","onDestory");
+//        setContentView(R.layout.empty);
+//         RelativeLayout titleBarRv = null;
+//         ImageView bottomIconIv = null;
+//         ImageView titleIconIv = null;
+//         HtmlTextView contentTv = null;
+//         TextView mHeadTitleTv = null;
+//         TextView mHeadAuthorTv = null;
+//         ImageView mHeadImg = null;
+//         ScrollView mMagazineScroll = null;
+//         ImageView mBackIv = null;
+//         RelativeLayout mDesignerRv = null;
+//         ImageView mCommentIv = null;
+//         ImageView shareIv = null;
+//        System.gc();
+//        System.exit(0);
+//        super.onDestroy();
+//    }
 }
