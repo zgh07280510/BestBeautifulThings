@@ -31,6 +31,10 @@ import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.sina.weibo.SinaWeibo;
+import cn.sharesdk.tencent.qq.QQ;
 
 /**
  * Created by dllo on 16/7/31.
@@ -53,6 +57,10 @@ public class DiscoverDetailActivity extends BaseActivity {
     private LinearLayout layout;
     private int y1 = 0;
     private int y2 = 0;
+    private Platform qq;
+    private Platform sina;
+    private XCRoundImageView userCommentIv;
+
 
 
     @Override
@@ -62,6 +70,7 @@ public class DiscoverDetailActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        userCommentIv = (XCRoundImageView) findViewById(R.id.discover_bottom_bar_icon);
         scrollView = (ScrollView) findViewById(R.id.scoll_detail);
         countTv = (TextView) findViewById(R.id.discover_comment_count);
         editText = (EditText) findViewById(R.id.discover_detail_et);
@@ -77,6 +86,9 @@ public class DiscoverDetailActivity extends BaseActivity {
         listView = (NoScrollGridView) findViewById(R.id.detail_list_view);
         mListView = (NoScrollGridView) findViewById(R.id.magazine_list_view);
         layout = (LinearLayout) findViewById(R.id.discover_detail_comment_linearlayout);
+        ShareSDK.initSDK(this);
+        sina = ShareSDK.getPlatform(SinaWeibo.NAME);
+        qq = ShareSDK.getPlatform(QQ.NAME);
 
     }
 
@@ -84,6 +96,13 @@ public class DiscoverDetailActivity extends BaseActivity {
     protected void initData() {
         adapter = new DetailActivityAdapter(this);
         tAdapter = new DetailactivityTitleAdapter(this);
+        if (qq.isValid()){
+            Picasso.with(this).load(qq.getDb().getUserIcon()).into(userCommentIv);
+        }else if (sina.isValid()){
+            Picasso.with(this).load(sina.getDb().getUserIcon()).into(userCommentIv);
+        }
+
+
         final Intent intent = getIntent();
         id = intent.getStringExtra("id");
         NetRequest.getInstance().getDiscoverDtailInformation(110, id, DetailBean.class, new NetListener.OnSucceed<DetailBean>() {
@@ -99,8 +118,22 @@ public class DiscoverDetailActivity extends BaseActivity {
                 conceptTv.setText("“" + bean.getData().getDesigner().getConcept() + "”");
                 detailNameTv.setText(bean.getData().getName());
                 descTv.setText(bean.getData().getDesc());
+
                 cId = String.valueOf(bean.getData().getDesigner().getId());
-                Log.d("DiscoverDetailActivity", cId);
+                BmobQuery<CommentBean> query = new BmobQuery<>();
+                query.addWhereEqualTo("id",cId);
+                query.findObjects(DiscoverDetailActivity.this, new FindListener<CommentBean>() {
+                    @Override
+                    public void onSuccess(List<CommentBean> list) {
+                        countTv.setText(String.valueOf(list.size()));
+                    }
+
+                    @Override
+                    public void onError(int i, String s) {
+                        countTv.setText("0");
+                    }
+                });
+
                 Picasso.with(MyApp.getContext()).load(bean.getData().getDesigner().getAvatar_url()).into(userIv);
                 adapter.setData(bean.getData().getImages());
                 listView.setAdapter(adapter);
@@ -162,22 +195,11 @@ public class DiscoverDetailActivity extends BaseActivity {
                 Intent intent1 = new Intent(DiscoverDetailActivity.this,DiscoverCommentActivity.class);
                 intent1.putExtra("content",editText.getText().toString());
                 intent1.putExtra("cId",cId);
+                editText.setText(" ");
                 startActivity(intent1);
             }
         });
-        BmobQuery<CommentBean> query = new BmobQuery<>();
-        query.addWhereEqualTo("id",cId);
-        query.findObjects(DiscoverDetailActivity.this, new FindListener<CommentBean>() {
-            @Override
-            public void onSuccess(List<CommentBean> list) {
-                countTv.setText(String.valueOf(list.size()));
-            }
 
-            @Override
-            public void onError(int i, String s) {
-                countTv.setText("0");
-            }
-        });
     }
     //向下平移动画
     private void showDownTranslateAnim() {

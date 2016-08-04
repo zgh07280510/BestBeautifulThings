@@ -55,9 +55,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         if (qq.isValid()) {
             Picasso.with(context).load(qq.getDb().getUserIcon()).into(iconIv);
             userName.setText(qq.getDb().getUserName());
-        }
+        }else if (weibo.isValid()){
 
-        if (weibo.isValid()){
             Picasso.with(context).load(weibo.getDb().getUserIcon()).into(iconIv);
 
             userName.setText(weibo.getDb().getUserName());
@@ -94,8 +93,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                     iconIv.setImageResource(R.mipmap.fffffff);
                     userName.setText("请登录");
 
-                }
-                if (weibo.isValid()) {
+                }else if (weibo.isValid()){
                     weibo.removeAccount();
                     iconIv.setImageResource(R.mipmap.fffffff);
                     userName.setText("请登录");
