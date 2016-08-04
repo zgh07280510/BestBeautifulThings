@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import cn.bmob.v3.Bmob;
 
+
 /**
  * Created by dllo on 16/7/25.
  */
@@ -14,8 +15,9 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Bmob.initialize(context, "17ebad504652156df5be753753517ac0");
+        Bmob.initialize(this, "20e24bcbb5d8067230d10523b8810cf8");
         context = this;
+
     }
 
     public static Context getContext() {

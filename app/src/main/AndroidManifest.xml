@@ -44,7 +44,7 @@
 
 
         <activity android:name=".designer.activity.DesignerInformationActivity"/>
-
+        <activity android:name=".discover.discoverdetail.DiscoverCommentActivity"/>
 
         <activity
             android:name=".homepage.HomePageActivity"

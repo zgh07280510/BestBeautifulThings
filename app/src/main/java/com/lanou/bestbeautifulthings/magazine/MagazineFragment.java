@@ -141,7 +141,7 @@ public class MagazineFragment extends BaseFragment {
             }, new NetListener.OnError() {
                 @Override
                 public void onError() {
-                    Toast.makeText(context, "请求失败", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, "请求失败", Toast.LENGTH_SHORT).show();
                 }
             });
 

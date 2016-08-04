@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ListView
+        android:id="@+id/discover_comment_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/shap_discover_detail"
+        android:orientation="horizontal">
+
+        <com.lanou.bestbeautifulthings.util.XCRoundImageView
+            android:id="@+id/discover_bottom_bar_icon"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:layout_weight="0.8"
+            android:src="@mipmap/fffffff" />
+
+        <EditText
+            android:id="@+id/discover_edit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="7"
+            android:background="@drawable/shape_magazine_detail_comment"
+            android:hint="说点什么吧" />
+
+
+        <TextView
+            android:id="@+id/discover_comment_send"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:text="发送"
+            android:layout_weight="2"/>
+    </LinearLayout>
+
+</RelativeLayout>
