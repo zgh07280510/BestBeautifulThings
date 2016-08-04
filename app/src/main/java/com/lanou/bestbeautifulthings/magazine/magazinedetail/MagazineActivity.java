@@ -214,6 +214,7 @@ public class MagazineActivity extends BaseActivity implements View.OnClickListen
                 break;
 
             case R.id.magazine_detail_share:
+                Toast.makeText(this, "aaaa", Toast.LENGTH_SHORT).show();
                 ShareSDK.initSDK(this);
                 OnekeyShare oks = new OnekeyShare();
                 //关闭sso授权
@@ -239,7 +240,7 @@ public class MagazineActivity extends BaseActivity implements View.OnClickListen
                 oks.setSiteUrl("http://sharesdk.cn");
 
 // 启动分享GUI
-                oks.show(getApplicationContext());
+                oks.show(this);
 
                 break;
 
