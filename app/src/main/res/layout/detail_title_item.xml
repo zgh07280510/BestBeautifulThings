@@ -14,7 +14,7 @@
 
         <TextView
             android:id="@+id/detail_title_tv"
-            android:layout_width="wrap_content"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="20dp"
@@ -22,7 +22,7 @@
 
         <TextView
             android:id="@+id/detail_sub_title"
-            android:layout_width="wrap_content"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/detail_title_tv"
             android:layout_marginLeft="15dp"
