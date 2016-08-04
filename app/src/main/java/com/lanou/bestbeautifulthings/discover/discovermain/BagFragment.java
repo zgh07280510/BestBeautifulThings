@@ -1,5 +1,6 @@
 package com.lanou.bestbeautifulthings.discover.discovermain;
 
+import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +8,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -62,7 +64,7 @@ public class BagFragment extends BaseFragment {
     protected void initData() {
 
 
-        dropdownIv.setOnClickListener(new View.OnClickListener() {
+        relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dropdownIv.setImageResource(R.mipmap.icon_whiteback_up);
@@ -122,9 +124,13 @@ public class BagFragment extends BaseFragment {
         recyclerView.setLayoutManager(manager);
     }
     public void popuWindows(){
+        WindowManager wm = (WindowManager)context
+                .getSystemService(Context.WINDOW_SERVICE);
+
+        int width = (int) (wm.getDefaultDisplay().getWidth());
 
 
-        popupWindow = new PopupWindow(popuView, DisplayUtil.px2dip(context,5200), DisplayUtil.px2dip(context,2200), false) {
+        popupWindow = new PopupWindow(popuView, width, DisplayUtil.px2dip(context,2200), false) {
             @Override
             public void dismiss() {
                 super.dismiss();
