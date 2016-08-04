@@ -2,8 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#000000"
     android:orientation="vertical">
+
+
 
     <ScrollView
         android:id="@+id/scoll_detail"
@@ -29,6 +32,40 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:background="#000000">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true">
+                    <su.levenetc.android.badgeview.BadgeView
+                        android:id="@+id/discover_unlike_bv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:badgeTextSize="16dip"
+                        app:badgeAnimationDuration="1000"
+                        app:badgeText="unlike!"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="5dp"
+                        />
+                    <TextView
+                        android:layout_width="1dp"
+                        android:layout_height="20dp"
+                        android:background="#ffffff"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="5dp"
+                        />
+                    <su.levenetc.android.badgeview.BadgeView
+                        android:id="@+id/discover_like_bv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        app:badgeTextSize="16dip"
+                        app:badgeAnimationDuration="1000"
+                        app:badgeText="like!"
+                        android:layout_marginRight="5dp"
+                        />
+                    </LinearLayout>
 
 
                 </RelativeLayout>
@@ -218,6 +255,12 @@
         </LinearLayout>
 
     </LinearLayout>
-
+    <ImageView
+        android:id="@+id/discover_detail_return"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_circle_back_normal"
+        android:layout_margin="15dp"
+        />
 
 </RelativeLayout>

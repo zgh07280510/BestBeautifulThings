@@ -44,8 +44,7 @@ public class LoadPopu {
     private static LinearLayout qqLayout;
     private static Platform qq;
     private static Platform sina;
-    private static boolean qqHas = false;
-    private static boolean sinaHas = false;
+
 
 
     public static void showLoadPopu(final Context context) {
@@ -139,8 +138,15 @@ public class LoadPopu {
             }
         });
 
+        WindowManager wm = (WindowManager)context
+                .getSystemService(Context.WINDOW_SERVICE);
 
-        popupWindow = new PopupWindow(view, DisplayUtil.px2dip(context,4500.0f), DisplayUtil.px2dip(context,5800.0f), false) {
+        int width = (int) (wm.getDefaultDisplay().getWidth()*0.9);
+        int height = (int) (wm.getDefaultDisplay().getHeight()*0.8);
+
+
+        popupWindow = new PopupWindow(view, width, height, false) {
+
             @Override
             public void dismiss() {
                 super.dismiss();

@@ -10,11 +10,9 @@ import com.lanou.bestbeautifulthings.base.BaseActivity;
 import com.lanou.bestbeautifulthings.base.MyApp;
 import com.lanou.bestbeautifulthings.designer.SingleLiteOrm;
 import com.lanou.bestbeautifulthings.designer.activity.DesignerInformationActivity;
-import com.lanou.bestbeautifulthings.designer.adapter.DesignerAttentionAdapter;
 import com.lanou.bestbeautifulthings.designer.bean.DesignerAttentionBean;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by dllo on 16/8/2.

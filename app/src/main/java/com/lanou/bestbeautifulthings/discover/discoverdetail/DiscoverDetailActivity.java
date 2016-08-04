@@ -1,6 +1,8 @@
 package com.lanou.bestbeautifulthings.discover.discoverdetail;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,8 +20,10 @@ import android.widget.TextView;
 import com.lanou.bestbeautifulthings.R;
 import com.lanou.bestbeautifulthings.base.BaseActivity;
 import com.lanou.bestbeautifulthings.base.MyApp;
+import com.lanou.bestbeautifulthings.designer.activity.BuyOnlineActivity;
 import com.lanou.bestbeautifulthings.discover.beans.CommentBean;
 import com.lanou.bestbeautifulthings.discover.beans.ShoesBean;
+import com.lanou.bestbeautifulthings.discover.discovermain.DiscoverBean;
 import com.lanou.bestbeautifulthings.magazine.magazinedetail.MagazineActivity;
 import com.lanou.bestbeautifulthings.net.NetListener;
 import com.lanou.bestbeautifulthings.net.NetRequest;
@@ -31,6 +35,11 @@ import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.sina.weibo.SinaWeibo;
+import cn.sharesdk.tencent.qq.QQ;
+import su.levenetc.android.badgeview.BadgeView;
 
 /**
  * Created by dllo on 16/7/31.
@@ -48,11 +57,18 @@ public class DiscoverDetailActivity extends BaseActivity {
     private LinearLayout commentLayout;
     private EditText editText;
     private String cId;
-    private TextView countTv;
+    private TextView countTv, bandTv;
     private ScrollView scrollView;
     private LinearLayout layout;
     private int y1 = 0;
+    private double likeCount, unlikeCount;
     private int y2 = 0;
+    private Platform qq;
+    private Platform sina;
+    private XCRoundImageView userCommentIv;
+    private ImageView returnIv;
+    private Bitmap unlikeBt, LikeBt;
+    private BadgeView unLikeBv, likeBv;
 
 
     @Override
@@ -62,6 +78,11 @@ public class DiscoverDetailActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        unLikeBv = (BadgeView) findViewById(R.id.discover_unlike_bv);
+        likeBv = (BadgeView) findViewById(R.id.discover_like_bv);
+        returnIv = (ImageView) findViewById(R.id.discover_detail_return);
+        bandTv = (TextView) findViewById(R.id.pinpai_net);
+        userCommentIv = (XCRoundImageView) findViewById(R.id.discover_bottom_bar_icon);
         scrollView = (ScrollView) findViewById(R.id.scoll_detail);
         countTv = (TextView) findViewById(R.id.discover_comment_count);
         editText = (EditText) findViewById(R.id.discover_detail_et);
@@ -77,13 +98,29 @@ public class DiscoverDetailActivity extends BaseActivity {
         listView = (NoScrollGridView) findViewById(R.id.detail_list_view);
         mListView = (NoScrollGridView) findViewById(R.id.magazine_list_view);
         layout = (LinearLayout) findViewById(R.id.discover_detail_comment_linearlayout);
+        ShareSDK.initSDK(this);
+        sina = ShareSDK.getPlatform(SinaWeibo.NAME);
+        qq = ShareSDK.getPlatform(QQ.NAME);
 
     }
 
     @Override
     protected void initData() {
+        returnIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         adapter = new DetailActivityAdapter(this);
         tAdapter = new DetailactivityTitleAdapter(this);
+        if (qq.isValid()) {
+            Picasso.with(this).load(qq.getDb().getUserIcon()).into(userCommentIv);
+        } else if (sina.isValid()) {
+            Picasso.with(this).load(sina.getDb().getUserIcon()).into(userCommentIv);
+        }
+
+
         final Intent intent = getIntent();
         id = intent.getStringExtra("id");
         NetRequest.getInstance().getDiscoverDtailInformation(110, id, DetailBean.class, new NetListener.OnSucceed<DetailBean>() {
@@ -99,8 +136,57 @@ public class DiscoverDetailActivity extends BaseActivity {
                 conceptTv.setText("“" + bean.getData().getDesigner().getConcept() + "”");
                 detailNameTv.setText(bean.getData().getName());
                 descTv.setText(bean.getData().getDesc());
+
+                likeCount = (double) (bean.getData().getLike_user_num());
+
+                unlikeCount = (double) (bean.getData().getUnlike_user_num());
+                unlikeBt = BitmapFactory.decodeResource(DiscoverDetailActivity.this.getResources(), R.mipmap.unlike);
+                Log.d("DiscoverDetailActivity", ((likeCount / (likeCount + unlikeCount))) * 100 + "");
+                LikeBt = BitmapFactory.decodeResource(DiscoverDetailActivity.this.getResources(), R.mipmap.like);
+
+                unLikeBv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        String likeCode = String.valueOf((int) (unlikeCount / (likeCount + unlikeCount) * 100));
+
+                        unLikeBv.setValues("%", likeCode, unlikeBt, "unlike");
+                    }
+                });
+
+                likeBv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String unlikeCode = String.valueOf((int) (likeCount / (likeCount + unlikeCount) * 100));
+                        likeBv.setValues("%", unlikeCode, LikeBt, "like");
+                    }
+                });
+
+
                 cId = String.valueOf(bean.getData().getDesigner().getId());
-                Log.d("DiscoverDetailActivity", cId);
+                bandTv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent1 = new Intent(DiscoverDetailActivity.this,
+                                BuyOnlineActivity.class);
+                        startActivity(intent1);
+
+                    }
+                });
+                BmobQuery<CommentBean> query = new BmobQuery<>();
+                query.addWhereEqualTo("id", cId);
+                query.findObjects(DiscoverDetailActivity.this, new FindListener<CommentBean>() {
+                    @Override
+                    public void onSuccess(List<CommentBean> list) {
+                        countTv.setText(String.valueOf(list.size()));
+                    }
+
+                    @Override
+                    public void onError(int i, String s) {
+                        countTv.setText("0");
+                    }
+                });
+
                 Picasso.with(MyApp.getContext()).load(bean.getData().getDesigner().getAvatar_url()).into(userIv);
                 adapter.setData(bean.getData().getImages());
                 listView.setAdapter(adapter);
@@ -111,7 +197,7 @@ public class DiscoverDetailActivity extends BaseActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent intent1 = new Intent(DiscoverDetailActivity.this, MagazineActivity.class);
                         String mId = String.valueOf(bean.getData().getRefer_articles().get(position).getId());
-                        intent1.putExtra("id",mId);
+                        intent1.putExtra("id", mId);
                         startActivity(intent1);
                     }
                 });
@@ -127,22 +213,22 @@ public class DiscoverDetailActivity extends BaseActivity {
         scrollView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN){
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     y1 = (int) event.getY();
                 }
-                if (event.getAction() == MotionEvent.ACTION_MOVE){
+                if (event.getAction() == MotionEvent.ACTION_MOVE) {
                     y2 = (int) event.getY();
 
-                    if (y2 - y1 > 15){
-                        if (layout.getVisibility() == View.GONE){
+                    if (y2 - y1 > 15) {
+                        if (layout.getVisibility() == View.GONE) {
 
                             showUpTranslateAnim();
-                        layout.setVisibility(View.VISIBLE);
+                            layout.setVisibility(View.VISIBLE);
                         }
 
 
-                    }else if (y1 - y2 >15){
-                        if (layout.getVisibility() == View.VISIBLE){
+                    } else if (y1 - y2 > 15) {
+                        if (layout.getVisibility() == View.VISIBLE) {
                             showDownTranslateAnim();
 
                             layout.setVisibility(View.GONE);
@@ -159,26 +245,16 @@ public class DiscoverDetailActivity extends BaseActivity {
         commentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(DiscoverDetailActivity.this,DiscoverCommentActivity.class);
-                intent1.putExtra("content",editText.getText().toString());
-                intent1.putExtra("cId",cId);
+                Intent intent1 = new Intent(DiscoverDetailActivity.this, DiscoverCommentActivity.class);
+                intent1.putExtra("content", editText.getText().toString());
+                intent1.putExtra("cId", cId);
+                editText.setText(" ");
                 startActivity(intent1);
             }
         });
-        BmobQuery<CommentBean> query = new BmobQuery<>();
-        query.addWhereEqualTo("id",cId);
-        query.findObjects(DiscoverDetailActivity.this, new FindListener<CommentBean>() {
-            @Override
-            public void onSuccess(List<CommentBean> list) {
-                countTv.setText(String.valueOf(list.size()));
-            }
 
-            @Override
-            public void onError(int i, String s) {
-                countTv.setText("0");
-            }
-        });
     }
+
     //向下平移动画
     private void showDownTranslateAnim() {
         TranslateAnimation translateAnimation
@@ -199,7 +275,7 @@ public class DiscoverDetailActivity extends BaseActivity {
                 Animation.RELATIVE_TO_SELF, 0,
                 Animation.RELATIVE_TO_PARENT, 0,
                 Animation.RELATIVE_TO_SELF, 1,
-                Animation.RELATIVE_TO_PARENT,0
+                Animation.RELATIVE_TO_PARENT, 0
         );
         translateAnimation.setDuration(1500);
         layout.startAnimation(translateAnimation);
