@@ -44,7 +44,6 @@ public class DesignerAdapter extends BaseAdapter {
 
     public DesignerAdapter(Context context) {
         this.context = context;
-        EventBus.getDefault().register(this);
     }
 
     public void setDesignerBean(DesignerBean designerBean) {
@@ -90,7 +89,7 @@ public class DesignerAdapter extends BaseAdapter {
             public void onClick(View v) {
                 int pos = holder.getPos();
                 attentionClick.onClick(pos);
-                holder.tvAttention.setText("已关注");
+                 holder.tvAttention.setText("已关注");
             }
         });
 

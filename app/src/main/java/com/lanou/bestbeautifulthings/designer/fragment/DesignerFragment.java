@@ -102,7 +102,7 @@ public class DesignerFragment extends BaseFragment implements AttentionClick {
 
     @Override
     public void onClick(int position) {
-
+        Toast.makeText(context, "点击", Toast.LENGTH_SHORT).show();
         QueryBuilder<DesignerAttentionBean> queryBuilder = new QueryBuilder<DesignerAttentionBean>(DesignerAttentionBean.class);
         id = data.getData().getDesigners().get(position).getId();
         queryBuilder.whereEquals("id", id);
@@ -116,7 +116,6 @@ public class DesignerFragment extends BaseFragment implements AttentionClick {
             SingleLiteOrm.getSingleLiteOrm().getLiteOrm().insert(bean);
         }else {
            SingleLiteOrm.getSingleLiteOrm().getLiteOrm().delete(bean);
-            EventBus.getDefault().post(new TvStateEventBus(0));
         }
     }
 }

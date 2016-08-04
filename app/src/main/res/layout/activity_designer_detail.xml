@@ -31,8 +31,8 @@
 
                     <Button
                         android:id="@+id/btn_designer_information_back"
-                        android:layout_width="@dimen/twenty_five_dp"
-                        android:layout_height="@dimen/twenty_five_dp"
+                        android:layout_width="@dimen/thirty_five_dp"
+                        android:layout_height="@dimen/thirty_five_dp"
                         android:layout_marginLeft="@dimen/rb_marginbottom"
                         android:layout_marginTop="@dimen/rb_marginbottom"
                         android:background="@mipmap/ic_circle_back_normal" />
