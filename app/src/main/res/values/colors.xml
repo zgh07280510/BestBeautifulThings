@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="buttonColor">#1E9859</color>
+    <color name="gridView_gray">#5F5F5F</color>
 </resources>

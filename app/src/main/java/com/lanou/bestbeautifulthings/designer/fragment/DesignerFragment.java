@@ -23,7 +23,6 @@ public class DesignerFragment extends BaseFragment {
     private GridView designerGridView;
     private DesignerAdapter designerAdapter;
     private GridViewPullToRefreshView gridViewPullToRefreshView;
-
     private DesignerBean data;
     @Override
     protected int setLayout() {

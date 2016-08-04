@@ -71,11 +71,12 @@ public class DesignerAdapter extends BaseAdapter {
         Glide.with(context).load(designerBean.getData().getDesigners().get(position).getRecommend_images().get(0)).into(holder.ivRecommend);
         Glide.with(context).load(designerBean.getData().getDesigners().get(position).getAvatar_url()).centerCrop().crossFade().into(holder.aivDesigner);
 
-       id = designerBean.getData().getDesigners().get(position).getId();
         holder.tvAttention.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 QueryBuilder<DesignerAttentionBean> queryBuilder = new QueryBuilder<DesignerAttentionBean>(DesignerAttentionBean.class);
+                id = designerBean.getData().getDesigners().get(position).getId();
                 queryBuilder.whereEquals("id", id);
                 if (SingleLiteOrm.getSingleLiteOrm().getLiteOrm().query(queryBuilder).size() == 0) {
                     DesignerAttentionBean bean = new DesignerAttentionBean();

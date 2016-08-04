@@ -42,10 +42,13 @@ public class BuyOnLineFragment extends BaseFragment {
         NetRequest.getInstance().getFlagshipAndBuyOnlineBean(id, FlagshipAndBuyOnLineBean.class, new NetListener.OnSucceed<FlagshipAndBuyOnLineBean>() {
             @Override
             public void OnSucceed(FlagshipAndBuyOnLineBean result) {
+               if (result.getData().getOnline_shops().size()>0){
+
                 Glide.with(context).load(result.getData().getOnline_shop_image()).into(ivBuyOnline);
                 tvBuyOnline.setText(result.getData().getOnline_shops().get(0).getName());
                 url = result.getData().getOnline_shops().get(0).getLink_url();
                name = result.getData().getOnline_shops().get(0).getName();
+               }
             }
         }, new NetListener.OnError() {
             @Override

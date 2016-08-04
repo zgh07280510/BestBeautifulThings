@@ -45,7 +45,9 @@ public class NetRequest {
                                     final NetListener.OnSucceed<T> onSucceed) {
 
         final Request request = new Request.Builder().url(url).build();
+//        Looper.prepare();
         final Handler handler = new Handler(Looper.getMainLooper()) {
+
             @Override
             public void handleMessage(Message msg) {
                 switch (msg.what) {
@@ -57,12 +59,15 @@ public class NetRequest {
                         break;
 
                 }
+        Looper.loop();
             }
+
         };
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 onError.onError();
+
             }
 
             @Override

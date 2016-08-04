@@ -16,12 +16,12 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="360dp">
+                android:layout_height="@dimen/rl_image_big">
 
                 <RelativeLayout
                     android:id="@+id/rl_designer"
                     android:layout_width="wrap_content"
-                    android:layout_height="340dp">
+                    android:layout_height="@dimen/rl_image">
 
                     <android.support.v4.view.ViewPager
                         android:id="@+id/designer_information_viewPager"
@@ -48,8 +48,8 @@
 
                 <cn.carbs.android.avatarimageview.library.AvatarImageView
                     android:id="@+id/iv_designer_head"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="@dimen/sixty_dp"
+                    android:layout_height="@dimen/sixty_dp"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true" />
             </RelativeLayout>
@@ -63,7 +63,7 @@
                 android:layout_marginTop="@dimen/rb_marginbottom"
                 android:gravity="center"
                 android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                android:textSize="@dimen/eighteen_sp" />
 
             <TextView
                 android:id="@+id/tv_label"
@@ -72,7 +72,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/five_dp"
                 android:gravity="center"
-                android:textSize="13sp" />
+                android:textSize="@dimen/thirteen_sp" />
 
             <TextView
                 android:id="@+id/tv_concept"
@@ -83,11 +83,11 @@
                 android:layout_marginRight="@dimen/twenty_dp"
                 android:layout_marginTop="@dimen/rb_marginbottom"
                 android:gravity="center"
-                android:textSize="15sp"/>
+                android:textSize="@dimen/fifteen_sp"/>
 
             <Button
-                android:layout_width="80dp"
-                android:layout_height="35dp"
+                android:layout_width="@dimen/eighty_dp"
+                android:layout_height="@dimen/twenty_five_dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/rb_marginbottom"
                 android:background="@android:color/black"
@@ -102,7 +102,7 @@
                 android:layout_marginRight="@dimen/fifteen_dp"
                 android:layout_marginTop="@dimen/five_dp"
                 android:paddingTop="@dimen/rb_marginbottom"
-                android:textSize="14sp"
+                android:textSize="@dimen/fourteen_sp"
                 android:maxLines="2"
                 android:ellipsize="end"
                 android:textColor="@android:color/black"/>
@@ -122,17 +122,16 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/black"
                 app:tabSelectedTextColor="@android:color/white"
-                app:tabTextColor="#5F5F5F"
+                app:tabTextColor="@color/gridView_gray"
                 android:layout_marginTop="@dimen/five_dp"/>
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/introduce_viewPager"
                 android:layout_width="match_parent"
-                android:layout_height="1000dp"
+                android:layout_height="@dimen/recycler_view_height"
                 android:background="@android:color/black" />
 
-            <!--app:tabSelectedTextColor="@android:color/white"-->
-            <!--app:tabIndicatorColor="@android:color/white"-->
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.lanou.bestbeautifulthings.R;
-import com.lanou.bestbeautifulthings.designer.eventbus.IdEventBus;
 import com.lanou.bestbeautifulthings.discover.beans.OrnamentBean;
 import com.lanou.bestbeautifulthings.discover.discoverdetail.DiscoverDetailActivity;
 import com.squareup.picasso.Picasso;
