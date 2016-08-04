@@ -64,6 +64,7 @@ public class HtmlTextView extends TextView {
 
                             //处理自己的逻辑
                         }
+                        Log.d("Sysout", "图片:" + ((ImageSpan) span).getSource());
                             
                     }
                 }
