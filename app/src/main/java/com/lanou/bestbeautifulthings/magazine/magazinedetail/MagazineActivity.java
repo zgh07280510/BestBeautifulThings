@@ -92,17 +92,15 @@ public class MagazineActivity extends BaseActivity implements View.OnClickListen
         //设置 图文混排
         contentTv.setHtmlFromString(content);
 
-
         //设置头标题
         mHeadTitleTv.setText(title);
         mHeadAuthorTv.setText(subTitle);
         Glide.with(this).load(titleImg).into(mHeadImg);
-
         //设置底部icon圆形图片
         setbottomIcon();
         //设置用户头像圆形图片
         settitleIcon();
-     //   contentTv.setMovementMethod(ScrollingMovementMethod.getInstance());
+        //   contentTv.setMovementMethod(ScrollingMovementMethod.getInstance());
         mMagazineScroll.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -155,7 +153,7 @@ public class MagazineActivity extends BaseActivity implements View.OnClickListen
         mDesignerRv.setOnClickListener(this);
         mCommentIv.setOnClickListener(this);
         shareIv.setOnClickListener(this);
-     //   contentTv.setOnClickListener(this);
+        //   contentTv.setOnClickListener(this);
 
 
     }
@@ -236,7 +234,7 @@ public class MagazineActivity extends BaseActivity implements View.OnClickListen
                 // comment是我对这条分享的评论，仅在人人网和QQ空间使用
                 oks.setComment("我是测试评论文本");
                 // site是分享此内容的网站名称，仅在QQ空间使用
-                    oks.setSite(getString(R.string.app_name));
+                oks.setSite(getString(R.string.app_name));
                 // siteUrl是分享此内容的网站地址，仅在QQ空间使用
                 oks.setSiteUrl("http://sharesdk.cn");
 
@@ -246,6 +244,7 @@ public class MagazineActivity extends BaseActivity implements View.OnClickListen
                 break;
 
             case R.id.magazine_detail_tv:
+                //   Toast.makeText(this, "邹国华都比", Toast.LENGTH_SHORT).show();
 
 
                 break;
