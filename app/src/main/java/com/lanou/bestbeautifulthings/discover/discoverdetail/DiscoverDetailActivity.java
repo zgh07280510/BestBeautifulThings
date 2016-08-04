@@ -2,13 +2,17 @@ package com.lanou.bestbeautifulthings.discover.discoverdetail;
 
 import android.content.Intent;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.lanou.bestbeautifulthings.R;
@@ -45,6 +49,10 @@ public class DiscoverDetailActivity extends BaseActivity {
     private EditText editText;
     private String cId;
     private TextView countTv;
+    private ScrollView scrollView;
+    private LinearLayout layout;
+    private int y1 = 0;
+    private int y2 = 0;
 
 
     @Override
@@ -54,6 +62,7 @@ public class DiscoverDetailActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        scrollView = (ScrollView) findViewById(R.id.scoll_detail);
         countTv = (TextView) findViewById(R.id.discover_comment_count);
         editText = (EditText) findViewById(R.id.discover_detail_et);
         commentLayout = (LinearLayout) findViewById(R.id.discover_detail_comment_layout);
@@ -67,6 +76,7 @@ public class DiscoverDetailActivity extends BaseActivity {
         userIv = (XCRoundImageView) findViewById(R.id.detail_user_image);
         listView = (NoScrollGridView) findViewById(R.id.detail_list_view);
         mListView = (NoScrollGridView) findViewById(R.id.magazine_list_view);
+        layout = (LinearLayout) findViewById(R.id.discover_detail_comment_linearlayout);
 
     }
 
@@ -114,6 +124,36 @@ public class DiscoverDetailActivity extends BaseActivity {
 
             }
         });
+        scrollView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN){
+                    y1 = (int) event.getY();
+                }
+                if (event.getAction() == MotionEvent.ACTION_MOVE){
+                    y2 = (int) event.getY();
+
+                    if (y2 - y1 > 15){
+                        if (layout.getVisibility() == View.GONE){
+
+                            showUpTranslateAnim();
+                        layout.setVisibility(View.VISIBLE);
+                        }
+
+
+                    }else if (y1 - y2 >15){
+                        if (layout.getVisibility() == View.VISIBLE){
+                            showDownTranslateAnim();
+
+                            layout.setVisibility(View.GONE);
+                        }
+                    }
+
+                }
+
+                return false;
+            }
+        });
 
 
         commentLayout.setOnClickListener(new View.OnClickListener() {
@@ -138,5 +178,32 @@ public class DiscoverDetailActivity extends BaseActivity {
                 countTv.setText("0");
             }
         });
+    }
+    //向下平移动画
+    private void showDownTranslateAnim() {
+        TranslateAnimation translateAnimation
+                = new TranslateAnimation(
+                Animation.RELATIVE_TO_SELF, 0,
+                Animation.RELATIVE_TO_PARENT, 0,
+                Animation.RELATIVE_TO_SELF, 0,
+                Animation.RELATIVE_TO_PARENT, 1
+        );
+        translateAnimation.setDuration(1500);
+        layout.startAnimation(translateAnimation);
+    }
+
+    //向上平移动画
+    private void showUpTranslateAnim() {
+        TranslateAnimation translateAnimation
+                = new TranslateAnimation(
+                Animation.RELATIVE_TO_SELF, 0,
+                Animation.RELATIVE_TO_PARENT, 0,
+                Animation.RELATIVE_TO_SELF, 1,
+                Animation.RELATIVE_TO_PARENT,0
+        );
+        translateAnimation.setDuration(1500);
+        layout.startAnimation(translateAnimation);
+
+
     }
 }

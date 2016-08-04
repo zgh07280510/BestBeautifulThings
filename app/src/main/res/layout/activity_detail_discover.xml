@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <ScrollView
-        android:id="@+id/scoll"
+        android:id="@+id/scoll_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -154,6 +154,7 @@
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/discover_detail_comment_linearlayout"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
