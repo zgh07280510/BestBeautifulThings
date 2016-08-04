@@ -1,4 +1,4 @@
-package com.lanou.bestbeautifulthings.designer.adapter;
+package com.lanou.bestbeautifulthings.mine;
 
 import android.content.Context;
 import android.util.Log;
