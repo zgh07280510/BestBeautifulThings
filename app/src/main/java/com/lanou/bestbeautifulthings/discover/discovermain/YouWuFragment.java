@@ -112,16 +112,7 @@ public class YouWuFragment extends BaseFragment implements OnRefreshListener {
         return date.getTime();
     }
 
-    /**
-     * 将data类型转换为String类型
-     *
-     * @param data
-     * @param formatType
-     * @return
-     */
-    public static String dateToString(Date data, String formatType) {
-        return new SimpleDateFormat(formatType).format(data);
-    }
+
 
     @Override
     public void onDownPullRefresh() {

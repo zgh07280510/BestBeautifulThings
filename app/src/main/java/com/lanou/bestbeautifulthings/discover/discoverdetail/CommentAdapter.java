@@ -63,7 +63,7 @@ public class CommentAdapter extends BaseAdapter {
         holder.contentTv.setText(data.get(position).getComment());
         Picasso.with(context).load(data.get(position).getUserIcon()).into(holder.userIv);
         holder.nameTv.setText(data.get(position).getUserName());
-
+        holder.timeTv.setText(data.get(position).getTime());
         return convertView;
     }
     class ViewHolder{

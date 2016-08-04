@@ -10,6 +10,15 @@ public class CommentBean extends BmobObject {
     private String userName;
     private String comment;
     private String id;
+    private String time;
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     public String getId() {
         return id;
