@@ -15,11 +15,18 @@ import com.lanou.bestbeautifulthings.R;
 import com.lanou.bestbeautifulthings.designer.SingleLiteOrm;
 import com.lanou.bestbeautifulthings.designer.bean.DesignerAttentionBean;
 import com.lanou.bestbeautifulthings.designer.bean.DesignerBean;
+import com.lanou.bestbeautifulthings.designer.eventbus.TvStateEventBus;
+import com.lanou.bestbeautifulthings.designer.interfaces.AttentionClick;
+import com.lanou.bestbeautifulthings.discover.beans.CommentBean;
 import com.litesuits.orm.db.assit.QueryBuilder;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
+import cn.bmob.v3.BmobQuery;
 import cn.carbs.android.avatarimageview.library.AvatarImageView;
+import cn.sharesdk.framework.Platform;
 
 /**
  * Created by dllo on 16/7/26.
@@ -27,11 +34,17 @@ import cn.carbs.android.avatarimageview.library.AvatarImageView;
 public class DesignerAdapter extends BaseAdapter {
     private Context context;
     private DesignerBean designerBean;
-    private int id;
-    private String s;
+    private int checked, check;
+    private AttentionClick attentionClick;
+    private DesignerViewHolder holder;
+
+    public void setAttentionClick(AttentionClick attentionClick) {
+        this.attentionClick = attentionClick;
+    }
 
     public DesignerAdapter(Context context) {
         this.context = context;
+        EventBus.getDefault().register(this);
     }
 
     public void setDesignerBean(DesignerBean designerBean) {
@@ -56,7 +69,7 @@ public class DesignerAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        DesignerViewHolder holder = null;
+        holder = null;
 
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.designer_gridview_item_list, parent, false);
@@ -66,6 +79,7 @@ public class DesignerAdapter extends BaseAdapter {
         } else {
             holder = (DesignerViewHolder) convertView.getTag();
         }
+        holder.setPos(position);
         holder.tvRecommend.setText(designerBean.getData().getDesigners().get(position).getName());
         holder.tvDesigner.setText(designerBean.getData().getDesigners().get(position).getLabel());
         Glide.with(context).load(designerBean.getData().getDesigners().get(position).getRecommend_images().get(0)).into(holder.ivRecommend);
@@ -74,23 +88,12 @@ public class DesignerAdapter extends BaseAdapter {
         holder.tvAttention.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                QueryBuilder<DesignerAttentionBean> queryBuilder = new QueryBuilder<DesignerAttentionBean>(DesignerAttentionBean.class);
-                id = designerBean.getData().getDesigners().get(position).getId();
-                queryBuilder.whereEquals("id", id);
-                if (SingleLiteOrm.getSingleLiteOrm().getLiteOrm().query(queryBuilder).size() == 0) {
-                    DesignerAttentionBean bean = new DesignerAttentionBean();
-                    bean.setId(id);
-                    bean.setAvatar(designerBean.getData().getDesigners().get(position).getAvatar_url());
-                    bean.setLabel(designerBean.getData().getDesigners().get(position).getLabel());
-                    bean.setName(designerBean.getData().getDesigners().get(position).getName());
-                    bean.setRecommendImage(designerBean.getData().getDesigners().get(position).getRecommend_images().get(0));
-                    SingleLiteOrm.getSingleLiteOrm().getLiteOrm().insert(bean);
-
-
-                }
+                int pos = holder.getPos();
+                attentionClick.onClick(pos);
+                holder.tvAttention.setText("已关注");
             }
         });
+
         return convertView;
     }
 
@@ -98,6 +101,15 @@ public class DesignerAdapter extends BaseAdapter {
         ImageView ivRecommend;
         TextView tvDesigner, tvRecommend, tvAttention;
         AvatarImageView aivDesigner;
+        int pos;
+
+        public int getPos() {
+            return pos;
+        }
+
+        public void setPos(int pos) {
+            this.pos = pos;
+        }
 
         public DesignerViewHolder(View itemView) {
             ivRecommend = (ImageView) itemView.findViewById(R.id.iv_recommend_big);
@@ -107,5 +119,11 @@ public class DesignerAdapter extends BaseAdapter {
             tvAttention = (TextView) itemView.findViewById(R.id.tv_attention);
 
         }
+
+        public void getState(TvStateEventBus tvStateEventBus) {
+            checked = tvStateEventBus.getStateChecked();
+            check = tvStateEventBus.getState();
+        }
     }
+
 }
