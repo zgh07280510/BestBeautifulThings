@@ -32,8 +32,9 @@ public class UrlImageGetter implements Html.ImageGetter {
 
     @Override
     public Drawable getDrawable(String source) {
-
+        Log.d("URL", "sysout:" + source);
         SetImage.getInstance().addImageUrl(source);
+
         final SoftReference<UrlDrawable> urlDrawableSoftReference = new SoftReference<UrlDrawable>(new UrlDrawable());
         // final UrlDrawable urlDrawable = new UrlDrawable();
         Glide.with(context).load(source).asBitmap().into(new SimpleTarget<Bitmap>() {

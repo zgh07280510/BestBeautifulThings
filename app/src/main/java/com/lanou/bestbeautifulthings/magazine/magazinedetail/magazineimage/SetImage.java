@@ -1,5 +1,7 @@
 package com.lanou.bestbeautifulthings.magazine.magazinedetail.magazineimage;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +21,7 @@ public class SetImage {
             synchronized (SetImage.class) {
                 if (s == null) {
                     s = new SetImage();
-
+                    Log.d("SetImage", "创建新的");
                 }
             }
         }
@@ -29,7 +31,13 @@ public class SetImage {
     public void addImageUrl(String imageUrl) {
         urls.add(imageUrl);
 
+    }
+    public void addImageUrl(String imgUrl,int pos){
+        urls.add(pos,imgUrl);
+    }
 
+    public void clear(){
+        urls.clear();
     }
 
     public List<String> getImageUrl() {

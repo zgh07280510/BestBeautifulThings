@@ -25,8 +25,13 @@ import com.lanou.bestbeautifulthings.R;
 import com.lanou.bestbeautifulthings.base.BaseActivity;
 import com.lanou.bestbeautifulthings.magazine.Datum;
 import com.lanou.bestbeautifulthings.magazine.magazinedetail.htmltextview.HtmlTextView;
+import com.lanou.bestbeautifulthings.magazine.magazinedetail.magazineimage.LoadImageActivity;
 import com.lanou.bestbeautifulthings.magazine.magazinedetail.magazineimage.MessageSpan;
+import com.lanou.bestbeautifulthings.magazine.magazinedetail.magazineimage.SetImage;
 import com.lanou.bestbeautifulthings.util.RoundDrawable;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
@@ -57,7 +62,14 @@ public class MagazineActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public int setLayout() {
+        SetImage.getInstance().clear();
         return R.layout.activity_magazinedetail;
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+      //  SetImage.getInstance().clear();
     }
 
     @Override
@@ -96,6 +108,18 @@ public class MagazineActivity extends BaseActivity implements View.OnClickListen
         mHeadTitleTv.setText(title);
         mHeadAuthorTv.setText(subTitle);
         Glide.with(this).load(titleImg).into(mHeadImg);
+        //加载大图
+        SetImage.getInstance().addImageUrl(titleImg,0);
+        mHeadImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MagazineActivity.this, LoadImageActivity.class);
+                intent.putStringArrayListExtra("urls", (ArrayList<String>) SetImage.getInstance().getImageUrl());
+                startActivity(intent);
+            }
+        });
+
+
         //设置底部icon圆形图片
         setbottomIcon();
         //设置用户头像圆形图片

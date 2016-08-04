@@ -1,6 +1,7 @@
 package com.lanou.bestbeautifulthings.magazine.magazinedetail.htmltextview;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Html;
@@ -10,9 +11,13 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.lanou.bestbeautifulthings.magazine.magazinedetail.magazineimage.LinkMovementMethodExt;
+import com.lanou.bestbeautifulthings.magazine.magazinedetail.magazineimage.LoadImageActivity;
 import com.lanou.bestbeautifulthings.magazine.magazinedetail.magazineimage.MessageSpan;
+import com.lanou.bestbeautifulthings.magazine.magazinedetail.magazineimage.SetImage;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ZouGuoHua on 16/7/29.
@@ -60,12 +65,13 @@ public class HtmlTextView extends TextView {
                     Object[] spans = (Object[]) ms.getObj();
                     for (Object span : spans) {
                         if (span instanceof ImageSpan) {
-                            Log.d("Sysout", "点击了图片" + ((ImageSpan) span).getSource());
-
+                            ArrayList<String> imageUrl = (ArrayList<String>) SetImage.getInstance().getImageUrl();
+                            Intent intent = new Intent(getContext(), LoadImageActivity.class);
+                            intent.putStringArrayListExtra("urls",imageUrl);
+                            getContext().startActivity(intent);
                             //处理自己的逻辑
                         }
-                        Log.d("Sysout", "图片:" + ((ImageSpan) span).getSource());
-                            
+
                     }
                 }
             }

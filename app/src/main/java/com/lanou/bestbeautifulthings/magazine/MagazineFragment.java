@@ -180,7 +180,7 @@ public class MagazineFragment extends BaseFragment {
                 // be replaced once the target Bitmap has been loaded
                 if (weakView.get() != null) {
                     weakView.get().onDataLoaded(datum, mDefaultThumbnail,
-                            mDefaultHeaderIcon, "Loading...", Color.BLUE);
+                            mDefaultHeaderIcon, "Loading...", Color.DKGRAY);
                 }
             }
         };
