@@ -116,7 +116,7 @@ public class DesignerFragment extends BaseFragment implements AttentionClick {
             SingleLiteOrm.getSingleLiteOrm().getLiteOrm().insert(bean);
         }else {
            SingleLiteOrm.getSingleLiteOrm().getLiteOrm().delete(bean);
-            EventBus.getDefault().post(new TvStateEventBus(0));
+           
         }
     }
 }
