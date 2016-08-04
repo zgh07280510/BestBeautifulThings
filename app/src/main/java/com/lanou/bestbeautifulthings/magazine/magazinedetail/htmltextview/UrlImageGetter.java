@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.lanou.bestbeautifulthings.magazine.magazinedetail.magazineimage.SetImage;
 
 import java.lang.ref.SoftReference;
 
@@ -31,6 +32,8 @@ public class UrlImageGetter implements Html.ImageGetter {
 
     @Override
     public Drawable getDrawable(String source) {
+
+        SetImage.getInstance().addImageUrl(source);
         final SoftReference<UrlDrawable> urlDrawableSoftReference = new SoftReference<UrlDrawable>(new UrlDrawable());
         // final UrlDrawable urlDrawable = new UrlDrawable();
         Glide.with(context).load(source).asBitmap().into(new SimpleTarget<Bitmap>() {
@@ -43,7 +46,6 @@ public class UrlImageGetter implements Html.ImageGetter {
                     float temp = scaleWidth;
                     //取得想要缩放的matrix参数
                     Matrix matrix = new Matrix();
-                    Log.d("UrlImageGetter", "scaleWidth:" + scaleWidth);
                     scaleWidth = Math.min(scaleWidth, 1.0f);
                     matrix.postScale(scaleWidth, scaleWidth);
                     resource = Bitmap.createBitmap(resource, 0, 0, resource.getWidth(), resource.getHeight(), matrix, true);

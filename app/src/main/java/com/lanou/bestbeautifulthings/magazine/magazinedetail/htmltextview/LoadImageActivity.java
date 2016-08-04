@@ -1,6 +1,7 @@
 package com.lanou.bestbeautifulthings.magazine.magazinedetail.htmltextview;
 
 import com.lanou.bestbeautifulthings.base.BaseActivity;
+import com.lanou.bestbeautifulthings.magazine.magazinedetail.magazineimage.SetImage;
 
 /**
  * Created by zouguohua on 16/8/3.
