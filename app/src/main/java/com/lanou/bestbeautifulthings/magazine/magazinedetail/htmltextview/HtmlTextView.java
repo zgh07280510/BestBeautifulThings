@@ -45,7 +45,7 @@ public class HtmlTextView extends TextView {
      *
      * @param html String containing HTML, for example: "<b>Hello world!</b>"
      */
-    public void setHtmlFromString(String html) {
+    public void setHtmlFromString(final String html) {
         Html.ImageGetter imgGetter;
 
         imgGetter = new UrlImageGetter(this, getContext());
@@ -62,17 +62,13 @@ public class HtmlTextView extends TextView {
                         if (span instanceof ImageSpan) {
                             Log.d("Sysout", "点击了图片" + ((ImageSpan) span).getSource());
 
-
                             //处理自己的逻辑
                         }
+                            
                     }
                 }
             }
         };
         setMovementMethod(new LinkMovementMethodExt(handler, ImageSpan.class));
-
-        // make links work
-        // setMovementMethod(LinkMovementMethod.getInstance());
-        //text.setTextColor(getResources().getColor(android.R.color.secondary_text_dark_nodisable));
     }
 }

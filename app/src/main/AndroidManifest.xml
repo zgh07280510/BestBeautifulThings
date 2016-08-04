@@ -53,7 +53,7 @@
             android:process=":picture"/>
         <activity android:name=".magazine.magazinedetail.comment.CommentActivity" />
         <activity
-            android:name="com.mob.tools.MobUIShell" 
+            android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
