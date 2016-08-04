@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/three_hundred_seventy_five">
 
         <ImageView
-            android:id="@+id/iv_recommend_big"
+            android:id="@+id/iv_designer_recommend_big"
             android:layout_width="match_parent"
             android:layout_height="@dimen/two_hundred_twenty_five" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/one_hundred_fifty"
-            android:layout_below="@id/iv_recommend_big"
+            android:layout_below="@id/iv_designer_recommend_big"
             android:background="@android:color/black"
             android:orientation="vertical" />
 
@@ -27,7 +26,7 @@
             android:orientation="vertical">
 
             <cn.carbs.android.avatarimageview.library.AvatarImageView
-                android:id="@+id/iv_avatar"
+                android:id="@+id/iv_designer_avatar"
                 android:layout_width="@dimen/sixty_dp"
                 android:layout_height="@dimen/sixty_dp"
                 android:layout_gravity="center"
@@ -37,7 +36,7 @@
                 app:aiv_ShowBoarder="false"/>
 
             <TextView
-                android:id="@+id/tv_recommend"
+                android:id="@+id/tv_designer_recommend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -47,7 +46,7 @@
                 android:textSize="@dimen/eighteen_sp" />
 
             <TextView
-                android:id="@+id/tv_originator"
+                android:id="@+id/tv_designer_originator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -55,20 +54,9 @@
                 android:layout_marginTop="@dimen/five_dp"
                 android:textColor="@android:color/darker_gray" />
 
-            <TextView
-                android:id="@+id/tv_attention"
-                android:layout_width="@dimen/eighty_dp"
-                android:layout_height="@dimen/twenty_five_dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:text="@string/attention"
-                android:textSize="@dimen/ten_sp"
-                android:textColor="@color/buttonColor"
-                android:background="@drawable/button_shape"
-                android:gravity="center"/>
+
 
         </LinearLayout>
     </RelativeLayout>
-
 
 </LinearLayout>

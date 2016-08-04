@@ -91,7 +91,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/rl_designer_attention">
 
         <ImageView
             android:id="@+id/mine_designer_iv"

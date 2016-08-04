@@ -39,10 +39,14 @@ public class FlagshipShopFragment extends BaseFragment {
         NetRequest.getInstance().getFlagshipAndBuyOnlineBean(id, FlagshipAndBuyOnLineBean.class, new NetListener.OnSucceed<FlagshipAndBuyOnLineBean>() {
             @Override
             public void OnSucceed(FlagshipAndBuyOnLineBean result) {
+                 if (result.getData().getShops().size()>0){
+
                 Glide.with(context).load(result.getData().getShop_image()).into(ivFlagship);
                 tvCity.setText(result.getData().getShops().get(0).getCity());
                 tvName.setText(result.getData().getShops().get(0).getName());
                 tvAddress.setText(result.getData().getShops().get(0).getAddress());
+                 }
+
             }
         }, new NetListener.OnError() {
             @Override
