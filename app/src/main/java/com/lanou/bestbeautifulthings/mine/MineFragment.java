@@ -106,8 +106,16 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
                 break;
             case R.id.rl_designer_attention:
+                if (qq.isValid()){
+
                 Intent intent = new Intent(getActivity(),DesignerAttentionActivity.class);
                 startActivity(intent);
+                }else if (weibo.isValid()){
+                    Intent intent = new Intent(getActivity(),DesignerAttentionActivity.class);
+                    startActivity(intent);
+                }else {
+                    LoadPopu.showLoadPopu(context);
+                }
                 break;
         }
 

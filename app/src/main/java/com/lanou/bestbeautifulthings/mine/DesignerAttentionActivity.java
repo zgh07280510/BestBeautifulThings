@@ -1,6 +1,7 @@
 package com.lanou.bestbeautifulthings.mine;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -37,6 +38,7 @@ public class DesignerAttentionActivity extends BaseActivity {
     protected void initData() {
         designerAttentionAdapter = new DesignerAttentionAdapter(MyApp.getContext());
         designerAttentionBean = SingleLiteOrm.getSingleLiteOrm().getLiteOrm().query(DesignerAttentionBean.class);
+        Log.d("DesignerAttentionActivi", "designerAttentionBean.size():" + designerAttentionBean.size());
         designerAttentionAdapter.setDesignerAttentionBean(designerAttentionBean);
         gridView.setAdapter(designerAttentionAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

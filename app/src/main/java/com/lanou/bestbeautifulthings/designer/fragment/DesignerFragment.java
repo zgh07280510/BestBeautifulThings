@@ -1,6 +1,7 @@
 package com.lanou.bestbeautifulthings.designer.fragment;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -19,9 +20,15 @@ import com.lanou.bestbeautifulthings.designer.adapter.DesignerAdapter;
 import com.lanou.bestbeautifulthings.designer.bean.DesignerBean;
 import com.lanou.bestbeautifulthings.net.NetListener;
 import com.lanou.bestbeautifulthings.net.NetRequest;
+import com.lanou.bestbeautifulthings.util.LoadPopu;
 import com.litesuits.orm.db.assit.QueryBuilder;
 
 import org.greenrobot.eventbus.EventBus;
+
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.sina.weibo.SinaWeibo;
+import cn.sharesdk.tencent.qq.QQ;
 
 /**
  * Created by zouguohua on 16/7/26.
@@ -32,6 +39,9 @@ public class DesignerFragment extends BaseFragment implements AttentionClick {
     private GridViewPullToRefreshView gridViewPullToRefreshView;
     private DesignerBean data;
     private int id;
+    private Platform qq;
+    private Platform sina;
+    private String name;
 
 
     @Override
@@ -43,12 +53,16 @@ public class DesignerFragment extends BaseFragment implements AttentionClick {
     protected void initView(View view) {
         designerGridView = (GridView) view.findViewById(R.id.designer_gridView);
         gridViewPullToRefreshView = (GridViewPullToRefreshView) view.findViewById(R.id.designer_pull_refresh_view);
+        ShareSDK.initSDK(MyApp.getContext());
+        qq = ShareSDK.getPlatform(QQ.NAME);
+        sina = ShareSDK.getPlatform(SinaWeibo.NAME);
 
 
     }
 
     @Override
     protected void initData() {
+
         designerAdapter = new DesignerAdapter(MyApp.getContext());
         designerAdapter.setAttentionClick(this);
         NetRequest.getInstance().getDesignerBean(DesignerBean.class, new NetListener.OnSucceed<DesignerBean>() {
@@ -103,20 +117,47 @@ public class DesignerFragment extends BaseFragment implements AttentionClick {
     @Override
     public void onClick(int position) {
 
-        QueryBuilder<DesignerAttentionBean> queryBuilder = new QueryBuilder<DesignerAttentionBean>(DesignerAttentionBean.class);
-        id = data.getData().getDesigners().get(position).getId();
-        queryBuilder.whereEquals("id", id);
+
+            name = data.getData().getDesigners().get(position).getName();
+            Log.d("DesignerFragment", name);
+        if (qq.isValid()) {
+            QueryBuilder<DesignerAttentionBean> queryBuilder = new QueryBuilder<DesignerAttentionBean>(DesignerAttentionBean.class);
+            queryBuilder.whereEquals("name", name);
             DesignerAttentionBean bean = new DesignerAttentionBean();
-        if (SingleLiteOrm.getSingleLiteOrm().getLiteOrm().query(queryBuilder).size() == 0) {
-            bean.setId(id);
-            bean.setAvatar(data.getData().getDesigners().get(position).getAvatar_url());
-            bean.setLabel(data.getData().getDesigners().get(position).getLabel());
-            bean.setName(data.getData().getDesigners().get(position).getName());
-            bean.setRecommendImage(data.getData().getDesigners().get(position).getRecommend_images().get(0));
-            SingleLiteOrm.getSingleLiteOrm().getLiteOrm().insert(bean);
-        }else {
-           SingleLiteOrm.getSingleLiteOrm().getLiteOrm().delete(bean);
-           
+            if (SingleLiteOrm.getSingleLiteOrm().getLiteOrm().query(queryBuilder).size() == 0) {
+                bean.setId(id);
+                bean.setAvatar(data.getData().getDesigners().get(position).getAvatar_url());
+                bean.setLabel(data.getData().getDesigners().get(position).getLabel());
+                bean.setName(data.getData().getDesigners().get(position).getName());
+                if (data.getData().getDesigners().get(position).getRecommend_images().size()>0){
+                bean.setRecommendImage(data.getData().getDesigners().get(position).getRecommend_images().get(0));
+                }
+                SingleLiteOrm.getSingleLiteOrm().getLiteOrm().insert(bean);
+            } else {
+                SingleLiteOrm.getSingleLiteOrm().getLiteOrm().delete(bean);
+
+            }
+        } else if (sina.isValid()) {
+
+            QueryBuilder<DesignerAttentionBean> queryBuilder = new QueryBuilder<>(DesignerAttentionBean.class);
+            queryBuilder.whereEquals("name", name);
+            DesignerAttentionBean bean = new DesignerAttentionBean();
+
+            if (SingleLiteOrm.getSingleLiteOrm().getLiteOrm().query(queryBuilder).size() == 0) {
+                bean.setId(id);
+                bean.setAvatar(data.getData().getDesigners().get(position).getAvatar_url());
+                bean.setLabel(data.getData().getDesigners().get(position).getLabel());
+                bean.setName(data.getData().getDesigners().get(position).getName());
+                bean.setRecommendImage(data.getData().getDesigners().get(position).getRecommend_images().get(0));
+                SingleLiteOrm.getSingleLiteOrm().getLiteOrm().insert(bean);
+            } else {
+                SingleLiteOrm.getSingleLiteOrm().getLiteOrm().delete(bean);
+
+            }
+        } else {
+            LoadPopu.showLoadPopu(context);
         }
+
+
     }
 }

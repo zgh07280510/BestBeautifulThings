@@ -44,7 +44,7 @@ public class DesignerAdapter extends BaseAdapter {
 
     public DesignerAdapter(Context context) {
         this.context = context;
-        EventBus.getDefault().register(this);
+
     }
 
     public void setDesignerBean(DesignerBean designerBean) {
@@ -82,14 +82,17 @@ public class DesignerAdapter extends BaseAdapter {
         holder.setPos(position);
         holder.tvRecommend.setText(designerBean.getData().getDesigners().get(position).getName());
         holder.tvDesigner.setText(designerBean.getData().getDesigners().get(position).getLabel());
+        if (designerBean.getData().getDesigners().get(position).getRecommend_images().size()>0){
+
         Glide.with(context).load(designerBean.getData().getDesigners().get(position).getRecommend_images().get(0)).into(holder.ivRecommend);
+        }
         Glide.with(context).load(designerBean.getData().getDesigners().get(position).getAvatar_url()).centerCrop().crossFade().into(holder.aivDesigner);
 
         holder.tvAttention.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int pos = holder.getPos();
-                attentionClick.onClick(pos);
+                attentionClick.onClick(pos+1);
                 holder.tvAttention.setText("已关注");
             }
         });
