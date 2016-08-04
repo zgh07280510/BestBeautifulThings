@@ -4,28 +4,35 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.BitmapDrawable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewParent;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.lanou.bestbeautifulthings.R;
-import com.lanou.bestbeautifulthings.mine.UserInfo;
-
+import com.lanou.bestbeautifulthings.mine.UserQQBean;
+import com.lanou.bestbeautifulthings.mine.UserSinaBean;
 
 
 import java.util.HashMap;
+import java.util.List;
 
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SaveListener;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.sina.weibo.SinaWeibo;
 import cn.sharesdk.tencent.qq.QQ;
-import cn.sharesdk.wechat.friends.Wechat;
+
 
 /**
  * Created by dllo on 16/8/2.
@@ -35,9 +42,10 @@ public class LoadPopu {
     private static View view;
     private static LinearLayout sinaLayout;
     private static LinearLayout qqLayout;
-    private static LinearLayout weixinLayout;
     private static Platform qq;
     private static Platform sina;
+    private static boolean qqHas = false;
+    private static boolean sinaHas = false;
 
 
     public static void showLoadPopu(final Context context) {
@@ -52,6 +60,21 @@ public class LoadPopu {
                     public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
                         Intent intent = new Intent("sina load is success");
                         context.sendBroadcast(intent);
+                        UserSinaBean userInfo = new UserSinaBean();
+                        userInfo.setSinaUserIcon(sina.getDb().getUserIcon());
+                        userInfo.setSinaUserName(sina.getDb().getUserName());
+                        userInfo.setSinaUserId(sina.getDb().getUserId());
+                        userInfo.save(context, new SaveListener() {
+                            @Override
+                            public void onSuccess() {
+                                Log.d("LoadPopu", "插入数据成功");
+                            }
+
+                            @Override
+                            public void onFailure(int i, String s) {
+
+                            }
+                        });
                     }
 
                     @Override
@@ -79,6 +102,23 @@ public class LoadPopu {
                     public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
                         Intent intent = new Intent("load is sucess");
                         context.sendBroadcast(intent);
+                        UserQQBean bean = new UserQQBean();
+                        bean.setQQUserIcon(qq.getDb().getUserIcon());
+                        bean.setQQUserId(qq.getDb().getUserName());
+                        bean.setQQUserName(qq.getDb().getUserId());
+                        bean.save(context, new SaveListener() {
+                            @Override
+                            public void onSuccess() {
+                                Log.d("LoadPopu", "插入数据成功");
+                            }
+
+                            @Override
+                            public void onFailure(int i, String s) {
+
+                            }
+                        });
+
+
 
                     }
 
@@ -99,32 +139,8 @@ public class LoadPopu {
             }
         });
 
-        weixinLayout = (LinearLayout) view.findViewById(R.id.weichat_layout);
-        weixinLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Platform weixin = ShareSDK.getPlatform(Wechat.NAME);
-                weixin.setPlatformActionListener(new PlatformActionListener() {
-                    @Override
-                    public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
 
-                    }
-
-                    @Override
-                    public void onError(Platform platform, int i, Throwable throwable) {
-
-                    }
-
-                    @Override
-                    public void onCancel(Platform platform, int i) {
-
-                    }
-                });
-                weixin.authorize();
-            }
-        });
-
-        popupWindow = new PopupWindow(view, DisplayUtil.px2dip(context,4500), DisplayUtil.px2dip(context,5800), false) {
+        popupWindow = new PopupWindow(view, DisplayUtil.px2dip(context,4500.0f), DisplayUtil.px2dip(context,5800.0f), false) {
             @Override
             public void dismiss() {
                 super.dismiss();
@@ -140,21 +156,7 @@ public class LoadPopu {
         popupWindow.setInputMethodMode(popupWindow.INPUT_METHOD_NEEDED);
         popupWindow.showAtLocation(view, Gravity.CENTER, Gravity.CENTER, DisplayUtil.px2dip(context,200));
     }
-    public static UserInfo getQQUserInfo(){
-        UserInfo userQQInfo = new UserInfo();
-        userQQInfo.setUserQQId(qq.getDb().getUserId());
-        userQQInfo.setUserQQImageUrl(qq.getDb().getUserIcon());
-        userQQInfo.setUserQQName(qq.getDb().getUserName());
-        return userQQInfo;
-    }
-    public static UserInfo getSinaUserInfo(){
-        UserInfo userSinaInfo = new UserInfo();
-        userSinaInfo.setUserSinaId(sina.getDb().getUserId());
-        userSinaInfo.setUserSinaImagUrl(sina.getDb().getUserIcon());
-        userSinaInfo.setUserSinaName(sina.getDb().getUserName());
-        return userSinaInfo;
 
-    }
 
 
 }

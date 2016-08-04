@@ -28,7 +28,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     private XCRoundImageView iconIv;
     private UserBrodCastReceiver receiver;
     private TextView userName;
-    private Platform qq,weibo;
+    private Platform qq, weibo;
     private TextView setting;
     private UserSinaReceiver sinaReceiver;
     private RelativeLayout rlDesignerAttention;
@@ -54,14 +54,18 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         ShareSDK.initSDK(context);
         qq = ShareSDK.getPlatform(QQ.NAME);
         weibo = ShareSDK.getPlatform(SinaWeibo.NAME);
+
         if (qq.isValid()) {
-            Picasso.with(context).load(LoadPopu.getQQUserInfo().getUserQQImageUrl()).into(iconIv);
+            Picasso.with(context).load(qq.getDb().getUserIcon()).into(iconIv);
             userName.setText(qq.getDb().getUserName());
         }
+
         if (weibo.isValid()){
-            Picasso.with(context).load(LoadPopu.getSinaUserInfo().getUserSinaImagUrl()).into(iconIv);
+            Picasso.with(context).load(weibo.getDb().getUserIcon()).into(iconIv);
+
             userName.setText(weibo.getDb().getUserName());
         }
+
         iconIv.setOnClickListener(this);
         setting.setOnClickListener(this);
         rlDesignerAttention.setOnClickListener(this);
@@ -71,7 +75,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         context.registerReceiver(receiver, filter);
 
         IntentFilter filter1 = new IntentFilter("sina load is success");
-        context.registerReceiver(sinaReceiver,filter1);
+        context.registerReceiver(sinaReceiver, filter1);
 
 
     }
@@ -80,7 +84,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.mine_icon:
-                if (qq.isValid()||weibo.isValid()) {
+                if (qq.isValid() || weibo.isValid()) {
                     return;
                 } else {
 
@@ -93,12 +97,14 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                     qq.removeAccount();
                     iconIv.setImageResource(R.mipmap.fffffff);
                     userName.setText("请登录");
+
                 }
-                if (weibo.isValid()){
+                if (weibo.isValid()) {
                     weibo.removeAccount();
                     iconIv.setImageResource(R.mipmap.fffffff);
                     userName.setText("请登录");
                 }
+                Toast.makeText(context, "请登录", Toast.LENGTH_SHORT).show();
 
                 break;
             case R.id.rl_designer_attention:
@@ -113,23 +119,26 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            Picasso.with(context).load(LoadPopu.getQQUserInfo().getUserQQImageUrl()).into(iconIv);
-            userName.setText(LoadPopu.getQQUserInfo().getUserQQName());
+            Picasso.with(context).load(qq.getDb().getUserIcon()).into(iconIv);
+            userName.setText(qq.getDb().getUserName());
             Toast.makeText(context, "登录成功", Toast.LENGTH_SHORT).show();
 
 
         }
 
     }
+
         public class UserSinaReceiver extends BroadcastReceiver{
 
             @Override
             public void onReceive(Context context, Intent intent) {
-                Picasso.with(context).load(LoadPopu.getSinaUserInfo().getUserSinaImagUrl()).into(iconIv);
-                userName.setText(LoadPopu.getSinaUserInfo().getUserSinaName());
+                Picasso.with(context).load(weibo.getDb().getUserIcon()).into(iconIv);
+                userName.setText(weibo.getDb().getUserName());
                 Toast.makeText(context, "登录成功", Toast.LENGTH_SHORT).show();
             }
+
         }
+
 
     @Override
     public void onDestroy() {
