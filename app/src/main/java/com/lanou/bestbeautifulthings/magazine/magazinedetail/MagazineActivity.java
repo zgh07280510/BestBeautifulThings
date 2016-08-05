@@ -264,25 +264,5 @@ public class MagazineActivity extends BaseActivity implements View.OnClickListen
                 break;
         }
     }
-//
-//    @Override
-//    protected void onDestroy() {
-//        Log.d("Sysout","onDestory");
-//        setContentView(R.layout.empty);
-//         RelativeLayout titleBarRv = null;
-//         ImageView bottomIconIv = null;
-//         ImageView titleIconIv = null;
-//         HtmlTextView contentTv = null;
-//         TextView mHeadTitleTv = null;
-//         TextView mHeadAuthorTv = null;
-//         ImageView mHeadImg = null;
-//         ScrollView mMagazineScroll = null;
-//         ImageView mBackIv = null;
-//         RelativeLayout mDesignerRv = null;
-//         ImageView mCommentIv = null;
-//         ImageView shareIv = null;
-//        System.gc();
-//        System.exit(0);
-//        super.onDestroy();
-//    }
+
 }
