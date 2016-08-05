@@ -69,8 +69,6 @@ public class NetRequest {
             public void onResponse(Call call, Response response) {
                 T t = null;
                 String result = null;
-
-
                 try {
                     result = response.body().string();
                     t = gson.fromJson(result, tClass);
