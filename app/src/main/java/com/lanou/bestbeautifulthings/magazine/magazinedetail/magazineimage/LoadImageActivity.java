@@ -31,10 +31,6 @@ public class LoadImageActivity extends BaseActivity {
     @Override
     protected void initData() {
         urls = getIntent().getStringArrayListExtra("urls");
-        Log.d("LoadImageActivity", "urls.size():" + urls.size());
-        for (int i = 0; i < urls.size(); i++) {
-            Log.d("aaaaaa", "url:" + urls.get(i));
-        }
         loadImageAdapter = new LoadImageAdapter(this);
         loadImageAdapter.setUrls(urls);
         loadImageVp.setAdapter(loadImageAdapter);

@@ -21,7 +21,6 @@ public class SetImage {
             synchronized (SetImage.class) {
                 if (s == null) {
                     s = new SetImage();
-                    Log.d("SetImage", "创建新的");
                 }
             }
         }
