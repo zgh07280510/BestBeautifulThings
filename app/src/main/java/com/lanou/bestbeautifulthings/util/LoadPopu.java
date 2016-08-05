@@ -78,6 +78,7 @@ public class LoadPopu {
 
                     @Override
                     public void onError(Platform platform, int i, Throwable throwable) {
+                        Toast.makeText(context, "登录失败了", Toast.LENGTH_SHORT).show();
 
                     }
 
