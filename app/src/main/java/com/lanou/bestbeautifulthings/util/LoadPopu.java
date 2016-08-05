@@ -84,7 +84,7 @@ public class LoadPopu {
 
                     @Override
                     public void onCancel(Platform platform, int i) {
-
+                        Toast.makeText(context, "登录失败了....", Toast.LENGTH_SHORT).show();
                     }
                 });
                 sina.authorize();
