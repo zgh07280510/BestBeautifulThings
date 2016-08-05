@@ -1,6 +1,7 @@
 package com.lanou.bestbeautifulthings.discover.discovermain;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -11,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.lanou.bestbeautifulthings.R;
+import com.lanou.bestbeautifulthings.base.MyApp;
+import com.lanou.bestbeautifulthings.designer.activity.DesignerInformationActivity;
 import com.lanou.bestbeautifulthings.util.XCRoundImageView;
 import com.squareup.picasso.Picasso;
 import java.text.SimpleDateFormat;
@@ -29,6 +32,12 @@ public class DiscoverYouWuAdapter extends BaseAdapter  {
     private DetailViewHolder holder = null;
     private Bitmap uBitmap;
     private Bitmap lBitmap;
+    private UserListener listener;
+
+
+    public void setListener(UserListener listener) {
+        this.listener = listener;
+    }
 
     public DiscoverYouWuAdapter(Context context) {
         this.context = context;
@@ -78,6 +87,7 @@ public class DiscoverYouWuAdapter extends BaseAdapter  {
             holder.dateTv.setVisibility(View.GONE);
             holder.weekTv.setVisibility(View.GONE);
         }
+        holder.setPos(position);
 
         holder.userlabelTv.setText(datas.getData().getActivities().get(position).getDesigner().getLabel());
         holder.userNameTv.setText(datas.getData().getActivities().get(position).getDesigner().getName());
@@ -96,6 +106,13 @@ public class DiscoverYouWuAdapter extends BaseAdapter  {
                 holder.likeBv.setValues("%", datas.getData().getActivities().get(position).getProduct().getLike_user_num(), lBitmap,"like");
             }
         });
+        holder.userIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               int pos = holder.getPos();
+                listener.userClick(position);
+            }
+        });
         return convertView;
     }
     class DetailViewHolder{
@@ -106,6 +123,15 @@ public class DiscoverYouWuAdapter extends BaseAdapter  {
         TextView userlabelTv;
         BadgeView unlikeBv;
         BadgeView likeBv;
+        int pos;
+
+        public int getPos() {
+            return pos;
+        }
+
+        public void setPos(int pos) {
+            this.pos = pos;
+        }
 
         public DetailViewHolder(View view){
             coverIv = (ImageView) view.findViewById(R.id.discover_detail_cover_iv);

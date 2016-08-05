@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import com.lanou.bestbeautifulthings.R;
 import com.lanou.bestbeautifulthings.base.BaseFragment;
 import com.lanou.bestbeautifulthings.base.MyApp;
+import com.lanou.bestbeautifulthings.designer.activity.DesignerInformationActivity;
 import com.lanou.bestbeautifulthings.discover.discoverdetail.DiscoverDetailActivity;
 import com.lanou.bestbeautifulthings.net.NetListener;
 import com.lanou.bestbeautifulthings.net.NetRequest;
@@ -23,7 +24,7 @@ import java.util.Date;
 /**
  * Created by zouguohua on 16/7/26.
  */
-public class YouWuFragment extends BaseFragment implements OnRefreshListener {
+public class YouWuFragment extends BaseFragment implements OnRefreshListener,UserListener {
     private DiscoverYouWuAdapter adapter;
     private RefreshListView listView;
     private Date date;
@@ -48,6 +49,7 @@ public class YouWuFragment extends BaseFragment implements OnRefreshListener {
     @Override
     protected void initData() {
         adapter = new DiscoverYouWuAdapter(MyApp.getContext());
+        adapter.setListener(this);
         date = gainCurrentDate();
         listView.setOnRefreshListener(this);
         mDate = subDateTime(date,24);
@@ -148,4 +150,10 @@ public class YouWuFragment extends BaseFragment implements OnRefreshListener {
     }
 
 
+    @Override
+    public void userClick(int position) {
+        Intent intent = new Intent(context, DesignerInformationActivity.class);
+        intent.putExtra("id",bean.getData().getActivities().get(position).getDesigner().getId());
+        context.startActivity(intent);
+    }
 }
