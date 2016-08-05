@@ -5,8 +5,6 @@ import android.os.Parcelable;
 
 import com.squareup.picasso.Target;
 
-import java.io.Serializable;
-
 
 /**
  * Created by zouguohua on 16/7/26.
@@ -20,16 +18,16 @@ public class Datum implements Parcelable{
     private  String name;
     private String label;//创始人
     private  String sub_title;
-    //实现包裹化,重写无参构造方法
+
     public Datum() {
     }
 
-    public Datum(String content, String headerTitle, int id, String image_url, String label, String link, String name, String sub_title, Target target) {
+    public Datum(String label, String content, String headerTitle, int id, String image_url, String link, String name, String sub_title, Target target) {
+        this.label = label;
         Content = content;
         this.headerTitle = headerTitle;
         this.id = id;
         this.image_url = image_url;
-        this.label = label;
         this.link = link;
         this.name = name;
         this.sub_title = sub_title;
@@ -47,6 +45,23 @@ public class Datum implements Parcelable{
         sub_title = in.readString();
     }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(headerTitle);
+        dest.writeString(link);
+        dest.writeString(Content);
+        dest.writeString(image_url);
+        dest.writeString(name);
+        dest.writeString(label);
+        dest.writeString(sub_title);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
     public static final Creator<Datum> CREATOR = new Creator<Datum>() {
         @Override
         public Datum createFromParcel(Parcel in) {
@@ -58,6 +73,14 @@ public class Datum implements Parcelable{
             return new Datum[size];
         }
     };
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
 
     public String getContent() {
         return Content;
@@ -91,14 +114,6 @@ public class Datum implements Parcelable{
         this.image_url = image_url;
     }
 
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
     public String getLink() {
         return link;
     }
@@ -115,14 +130,6 @@ public class Datum implements Parcelable{
         this.name = name;
     }
 
-    public Target getTarget() {
-        return target;
-    }
-
-    public void setTarget(Target target) {
-        this.target = target;
-    }
-
     public String getSub_title() {
         return sub_title;
     }
@@ -131,20 +138,11 @@ public class Datum implements Parcelable{
         this.sub_title = sub_title;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public Target getTarget() {
+        return target;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
-        dest.writeString(headerTitle);
-        dest.writeString(link);
-        dest.writeString(Content);
-        dest.writeString(image_url);
-        dest.writeString(name);
-        dest.writeString(label);
-        dest.writeString(sub_title);
+    public void setTarget(Target target) {
+        this.target = target;
     }
 }

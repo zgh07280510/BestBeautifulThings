@@ -21,6 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.lanou.bestbeautifulthings.R;
 import com.lanou.bestbeautifulthings.base.BaseActivity;
 import com.lanou.bestbeautifulthings.magazine.Datum;
@@ -58,7 +60,9 @@ public class MagazineActivity extends BaseActivity implements View.OnClickListen
     private RelativeLayout mDesignerRv;
     private ImageView mCommentIv;
     private ImageView shareIv;
-
+    private Datum magBean;
+    private TextView cityTv;
+    private TextView authorNameTv;
 
     @Override
     public int setLayout() {
@@ -69,7 +73,6 @@ public class MagazineActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onRestart() {
         super.onRestart();
-      //  SetImage.getInstance().clear();
     }
 
     @Override
@@ -82,7 +85,8 @@ public class MagazineActivity extends BaseActivity implements View.OnClickListen
         mDesignerRv = (RelativeLayout) findViewById(R.id.designer_rv);
         mCommentIv = (ImageView) findViewById(R.id.comment_iv);
         shareIv = (ImageView) findViewById(R.id.magazine_detail_share);
-
+        cityTv = (TextView) findViewById(R.id.magazine_detail_title_creater);
+        authorNameTv = (TextView) findViewById(R.id.magazine_detail_title_name);
 
         mMagazineScroll = (ScrollView) findViewById(R.id.magazine_detail_scrollview);
 
@@ -96,7 +100,7 @@ public class MagazineActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void initData() {
         Intent intent = getIntent();
-        Datum magBean = intent.getParcelableExtra("magBean");
+        magBean = intent.getParcelableExtra("magBean");
         String content = magBean.getContent();
         String title = magBean.getHeaderTitle();//头标题
         String subTitle = magBean.getSub_title();
@@ -108,8 +112,12 @@ public class MagazineActivity extends BaseActivity implements View.OnClickListen
         mHeadTitleTv.setText(title);
         mHeadAuthorTv.setText(subTitle);
         Glide.with(this).load(titleImg).into(mHeadImg);
+
+
+        cityTv.setText(magBean.getLabel());
+        authorNameTv.setText(magBean.getName());
         //加载大图
-        SetImage.getInstance().addImageUrl(titleImg,0);
+        SetImage.getInstance().addImageUrl(titleImg, 0);
         mHeadImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,35 +164,21 @@ public class MagazineActivity extends BaseActivity implements View.OnClickListen
             }
         });
 
-//        mMagazineScroll.setOnScrollChangeListener(new View.OnScrollChangeListener() {
-//            @Override
-//            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-//                if (oldScrollY - scrollY > 20) {
-//                    if (titleBarRv.getVisibility() != View.GONE) {
-//                        showUpTranslateAnim();
-//                        titleBarRv.setVisibility(View.GONE);
-//                    }
-//                    //向下滑
-//                } else if (scrollY - oldScrollY > 20) {
-//                    if (titleBarRv.getVisibility() == View.GONE) {
-//                        showDownTranslateAnim();
-//                        titleBarRv.setVisibility(View.VISIBLE);
-//                    }
-//                }
-//            }
-//        });
+
         mBackIv.setOnClickListener(this);
         mDesignerRv.setOnClickListener(this);
         mCommentIv.setOnClickListener(this);
         shareIv.setOnClickListener(this);
-        //   contentTv.setOnClickListener(this);
-
-
     }
 
     private void settitleIcon() {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.magazine_detail_icon);
-        titleIconIv.setImageDrawable(new RoundDrawable(bitmap));
+        Glide.with(this).load(magBean.getImage_url()).asBitmap().into(new SimpleTarget<Bitmap>() {
+            @Override
+            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                titleIconIv.setImageDrawable(new RoundDrawable(resource));
+            }
+        });
     }
 
     private void setbottomIcon() {
@@ -228,17 +222,12 @@ public class MagazineActivity extends BaseActivity implements View.OnClickListen
                 finish();
                 break;
             case R.id.designer_rv:
-
-
                 break;
 
             case R.id.comment_iv:
-
-
                 break;
 
             case R.id.magazine_detail_share:
-                Toast.makeText(this, "aaaa", Toast.LENGTH_SHORT).show();
                 ShareSDK.initSDK(this);
                 OnekeyShare oks = new OnekeyShare();
                 //关闭sso授权
@@ -251,13 +240,13 @@ public class MagazineActivity extends BaseActivity implements View.OnClickListen
                 // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
                 oks.setTitleUrl("http://sharesdk.cn");
                 // text是分享文本，所有平台都需要这个字段
-                oks.setText("我是分享文本");
+                oks.setText("我美了美了美了");
                 // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
                 //oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
                 // url仅在微信（包括好友和朋友圈）中使用
                 oks.setUrl("http://sharesdk.cn");
                 // comment是我对这条分享的评论，仅在人人网和QQ空间使用
-                oks.setComment("我是测试评论文本");
+                oks.setComment("我醉了醉了醉了");
                 // site是分享此内容的网站名称，仅在QQ空间使用
                 oks.setSite(getString(R.string.app_name));
                 // siteUrl是分享此内容的网站地址，仅在QQ空间使用
